@@ -28,6 +28,8 @@
             <string>turn_speed = room_speed
 alarm[0] = turn_speed
 ramming = false
+true_x = x
+true_y = y
 </string>
           </argument>
         </arguments>
@@ -50,7 +52,7 @@ ramming = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>ds_grid_set(grid_map,xprevious/64,yprevious/64,0)
+            <string>ds_grid_set(grid_map,true_x/64,true_y/64,0)
 </string>
           </argument>
         </arguments>
@@ -73,7 +75,12 @@ ramming = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if ramming = false
+            <string>speed = 0
+x = true_x
+y = true_y
+xprevious = true_x
+yprevious = true_y
+if ramming = false
 {
 if oHero.x = x
 {
@@ -151,7 +158,7 @@ switch(ramming)
     case 4:
         x+=64;
 }
-if ds_grid_get(grid_map,x/64,y/64) != 0  or  x &lt; 0  or y &lt; 0 or x &gt;= 64*16 or y &gt;= 64*10 
+if ds_grid_get(grid_map,x/64,y/64) != 0 or x &lt; 0 or y &lt; 0 or x &gt;= 64*16 or y &gt;= 64*10 
 {
     y = yprevious
     x = xprevious
@@ -164,7 +171,15 @@ else
 }
 alarm[0] = turn_speed/3
 }
-
+if x!=xprevious or y!=yprevious
+{
+    true_x = x
+    true_y = y
+    speed = 64/alarm[0]
+    direction = point_direction(xprevious,yprevious,true_x,true_y)
+    y = yprevious
+    x = xprevious
+}
 </string>
           </argument>
         </arguments>
