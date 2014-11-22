@@ -25,12 +25,40 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>turn_speed = room_speed
+            <string>turn_speed = room_speed / 2
 alarm[0] = turn_speed
 ramming = false
 true_x = x
 true_y = y
 </string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>541</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_sprite_set</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>5</kind>
+            <sprite>sFireBro</sprite>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>0</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>0</string>
           </argument>
         </arguments>
       </action>
@@ -169,7 +197,7 @@ else
     ds_grid_set(grid_map,xprevious/64,yprevious/64,0)
     ds_grid_set(grid_map,x/64,y/64,id)
 }
-alarm[0] = turn_speed/3
+alarm[0] = turn_speed/6
 }
 if x!=xprevious or y!=yprevious
 {
@@ -180,6 +208,7 @@ if x!=xprevious or y!=yprevious
     y = yprevious
     x = xprevious
 }
+if (ramming=false) {image_index=0} else {image_index=1}
 </string>
           </argument>
         </arguments>
