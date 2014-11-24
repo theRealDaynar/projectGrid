@@ -12,17 +12,10 @@
   <showcolour>-1</showcolour>
   <code>globalvar grid_map;
 grid_map = ds_grid_create(16,10)
-for( var yy=0;yy&lt;16;yy++)
-{
-    for( var xx=0;xx&lt;10;xx++)
-    {
-        var t = tile_layer_find(1000000,xx * 64,yy * 64)
-        if tile_exists(t) and tile_get_background(t) = bg_wall
-            ds_grid_set(grid_map,xx,yy,-1)
-        else
-            ds_grid_set(grid_map,xx,yy,0) 
-    }
-}</code>
+make_collision_grid()
+oHero.right_room = r_1_0
+oHero.top_room = r_0_1
+oHero.left_room = r_n1_0</code>
   <enableViews>0</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
@@ -197,8 +190,6 @@ for( var yy=0;yy&lt;16;yy++)
     <tile bgName="bg_wall" x="768" y="0" w="64" h="64" xo="0" yo="64" id="10000235" name="inst_D1A542DA" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_wall" x="832" y="0" w="64" h="64" xo="0" yo="64" id="10000236" name="inst_991D6A9B" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_wall" x="896" y="0" w="64" h="64" xo="0" yo="64" id="10000237" name="inst_DD6B4359" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bg_wall" x="960" y="0" w="64" h="64" xo="0" yo="64" id="10000238" name="inst_E2DF2123" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bg_wall" x="960" y="64" w="64" h="64" xo="0" yo="64" id="10000239" name="inst_F3E8694D" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_wall" x="576" y="576" w="64" h="64" xo="0" yo="64" id="10000241" name="inst_40A5624F" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_wall" x="640" y="576" w="64" h="64" xo="0" yo="64" id="10000242" name="inst_45173C8F" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_wall" x="704" y="576" w="64" h="64" xo="0" yo="64" id="10000243" name="inst_E0BC9FFE" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
@@ -209,8 +200,6 @@ for( var yy=0;yy&lt;16;yy++)
     <tile bgName="bg_wall" x="960" y="512" w="64" h="64" xo="0" yo="64" id="10000248" name="inst_08280D31" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_wall" x="960" y="448" w="64" h="64" xo="0" yo="64" id="10000249" name="inst_49E6834F" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_wall" x="960" y="384" w="64" h="64" xo="0" yo="64" id="10000250" name="inst_06C98300" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bg_wall" x="960" y="192" w="64" h="64" xo="0" yo="64" id="10000253" name="inst_3DB37D75" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bg_wall" x="960" y="128" w="64" h="64" xo="0" yo="64" id="10000254" name="inst_DAB6F4F5" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="background3_grass" x="64" y="384" w="64" h="64" xo="0" yo="448" id="10000255" name="inst_7F8BB405" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="background3_grass" x="128" y="384" w="64" h="64" xo="64" yo="448" id="10000256" name="inst_181336C0" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="background3_grass" x="192" y="384" w="64" h="64" xo="128" yo="448" id="10000257" name="inst_4330B7D7" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
@@ -227,6 +216,10 @@ for( var yy=0;yy&lt;16;yy++)
     <tile bgName="background3_grass" x="128" y="64" w="64" h="64" xo="64" yo="0" id="10000275" name="inst_17399351" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_wall" x="448" y="576" w="64" h="64" xo="0" yo="64" id="10000276" name="inst_119CA1AE" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_wall" x="512" y="576" w="64" h="64" xo="0" yo="64" id="10000277" name="inst_EC41394D" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bg_wall" x="960" y="192" w="64" h="64" xo="0" yo="64" id="10000322" name="inst_97E0AF8B" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bg_wall" x="960" y="128" w="64" h="64" xo="0" yo="64" id="10000323" name="inst_18FE6F38" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bg_wall" x="960" y="64" w="64" h="64" xo="0" yo="64" id="10000324" name="inst_D05DEA91" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bg_wall" x="960" y="0" w="64" h="64" xo="0" yo="64" id="10000325" name="inst_BE0E1DB7" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
   </tiles>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>

@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -32,6 +32,58 @@ move_cooldown = false
 key_log = ds_list_create()
 atk_key_log = ds_list_create()
 image_speed = .5
+top_room = room
+right_room = room
+bottom_room = room
+left_room = room
+trans_dir = 0
+globalvar old_room_surface;
+old_room_surface = 10000
+globalvar new_room_surface;
+new_room_surface = 10000
+room_start = -1
+room_trans = room_speed
+dd = false
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>instance_activate_all()
+room_start = 0
+switch(trans_dir)
+{
+case 0:
+    x = 64*15
+break;
+case 1:
+    y = 64*9
+    break;
+case 2:
+    x = 64*0
+break;
+case 3:
+    y = 64*0
+break;
+}
+dd = false
 </string>
           </argument>
         </arguments>
@@ -167,7 +219,7 @@ randomize()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if move_cooldown = false and ds_list_size(key_log) &gt; 0
+            <string>if move_cooldown = false and ds_list_size(key_log) &gt; 0 and room_start &lt;= 0
 {
     switch(ds_list_find_value(key_log, ds_list_size(key_log)-1))
     {
@@ -184,10 +236,34 @@ randomize()
         x+=64;
     break;
     }    
-    if ds_grid_get(grid_map,x/64,y/64) != 0 or  x &lt; 0  or y &lt; 0 or x &gt;= 64*16 or y &gt;= 64*10 
+    if ds_grid_get(grid_map,x/64,y/64) != 0
     {
         y = yprevious
         x = xprevious
+    }
+    else if x &lt; 0
+    {
+        //room_goto(left_room)
+        trans_dir = 0
+        dd = true
+    }
+    else if y &lt; 0
+    {
+        //room_goto(top_room)
+        trans_dir = 1
+        dd = true
+    }
+    else if x &gt;= 64*16
+    {
+        //room_goto(right_room)
+        trans_dir = 2
+        dd = true
+    }
+    else if y &gt;= 64*10 
+    {
+        //room_goto(bottom_room)
+        trans_dir = 3
+        dd = true
     }
     else
     {
@@ -219,9 +295,170 @@ if atk_cooldown = false and ds_list_size(atk_key_log) &gt; 0
     atk_cooldown = true
     alarm[1] = atk_speed
 }
-if !instance_exists(oEnemy)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>surface_free(old_room_surface)
+old_room_surface = surface_create(1024,640)
+surface_set_target(old_room_surface)
+draw_surface(application_surface,0,0)
+surface_reset_target()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if room_start = 0
+room_start=1
+else
+room_start = 0
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="73">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if dd = true and room_start = 0
 {
-    instance_create(448,64,oEnemy)
+switch(trans_dir)
+    {
+    case 0:
+room_goto(left_room)
+    break;
+    case 1:
+room_goto(top_room)
+    break;
+    case 2:
+room_goto(right_room)
+    break
+    case 3:
+room_goto(bottom_room)
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if room_start &gt; 0
+{
+    if room_start = 1
+    {
+        room_start = 2
+        alarm[2] = room_trans
+        surface_free(new_room_surface)
+        new_room_surface = surface_create(1024,640)
+        surface_set_target(new_room_surface)
+        draw_surface(application_surface,0,0)
+        surface_reset_target()
+        instance_deactivate_all(true)
+    }
+    var xx = 0
+    var yy = 0
+    var yyy = 0
+    var xxx = 0
+    var px
+    var py
+    switch(trans_dir)
+    {
+    case 0:
+        xx = ( (room_trans - alarm[2]) / room_trans) * 1024
+        xxx = ( (room_trans - alarm[2]) / room_trans) * 1024 - 1024
+        var px = xx - (room_trans - alarm[2]) / room_trans * 64
+        var py = y
+    break;
+    case 1:
+        yy = ( (room_trans - alarm[2]) / room_trans) * 640
+        yyy = ( (room_trans - alarm[2]) / room_trans) * 640 - 640
+        var px = x
+        var py = yy - (room_trans - alarm[2]) / room_trans * 64
+    break;
+    case 2:
+        xx = ( (alarm[2]) / room_trans) * 1024 - 1024
+        xxx = ( (alarm[2]) / room_trans) * 1024
+        var px = xxx + (room_trans - alarm[2]) / room_trans * 64 - 64
+        var py = y
+    break
+    case 3:
+        yy = ( (alarm[2]) / room_trans) * 640 - 640
+        yyy = ( (alarm[2]) / room_trans) * 640
+        var px = x
+        var py = yyy + (room_trans - alarm[2]) / room_trans * 64 - 64
+    }
+     if surface_exists(new_room_surface)
+            draw_surface(new_room_surface, xxx, yyy)
+     if surface_exists(old_room_surface)
+            draw_surface(old_room_surface,xx, yy)
+     draw_sprite_ext(sprite_index,image_index,px,py,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
 }
 </string>
           </argument>
@@ -245,11 +482,14 @@ if !instance_exists(oEnemy)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self()
-draw_sprite_ext(sAttackPossibility,0,x,y + 64,1,1,0,c_white,.3)
-draw_sprite_ext(sAttackPossibility,0,x,y - 64,1,1,0,c_white,.3)
-draw_sprite_ext(sAttackPossibility,0,x + 64,y,1,1,0,c_white,.3)
-draw_sprite_ext(sAttackPossibility,0,x - 64,y,1,1,0,c_white,.3)
+            <string>if room_start = 0 and dd = false
+{
+    draw_sprite_ext(sAttackPossibility,0,x,y + 64,1,1,0,c_white,.3)
+    draw_sprite_ext(sAttackPossibility,0,x,y - 64,1,1,0,c_white,.3)
+    draw_sprite_ext(sAttackPossibility,0,x + 64,y,1,1,0,c_white,.3)
+    draw_sprite_ext(sAttackPossibility,0,x - 64,y,1,1,0,c_white,.3)
+    draw_self()
+}
 </string>
           </argument>
         </arguments>

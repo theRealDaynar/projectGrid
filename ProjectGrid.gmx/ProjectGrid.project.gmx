@@ -20,6 +20,7 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\update_key_log.gml</script>
+    <script>scripts\make_collision_grid.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\oHero</object>
@@ -27,10 +28,10 @@
     <object>objects\oAttackParticle</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\R_00</room>
-    <room>rooms\R_01</room>
-    <room>rooms\R_10</room>
-    <room>rooms\R_W10</room>
+    <room>rooms\r_0_0</room>
+    <room>rooms\r_0_1</room>
+    <room>rooms\r_1_0</room>
+    <room>rooms\r_n1_0</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
