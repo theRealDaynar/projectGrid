@@ -44,6 +44,7 @@ new_room_surface = 10000
 room_start = -1
 room_trans = room_speed
 dd = false
+mini_map = surface_create(5*8*4,6*5*4)
 </string>
           </argument>
         </arguments>
@@ -348,6 +349,17 @@ surface_reset_target()
 room_start=1
 else
 room_start = 0
+if !surface_exists(mini_map)
+    mini_map = surface_create(5*8*4,6*5*4)
+surface_set_target(mini_map)
+draw_clear(c_gray)
+draw_set_colour(c_black)
+for(var i = 8;i&lt;=5*8;i+=8)
+draw_line(i*4,0,i*4,6*5*4)
+for(var i = 5;i&lt;=6*5;i+=5)
+draw_line(0,i*4,5*8*4,i*4)
+draw_rectangle_colour((room-r1A )%5*8*4,floor((room-r1A)/5)*5*4,4*((room-r1A)%5*8+8),4*(floor((room - r1A)/5)*5+5),c_yellow,c_yellow,c_yellow,c_yellow,false)
+surface_reset_target()
 </string>
           </argument>
         </arguments>
@@ -460,6 +472,8 @@ room_goto(room + 5)
             draw_surface(old_room_surface,xx, yy)
      draw_sprite_ext(sprite_index,image_index,px,py,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
 }
+if surface_exists(mini_map)
+    draw_surface(mini_map,room_width - surface_get_width(mini_map),room_height - surface_get_height(mini_map))
 </string>
           </argument>
         </arguments>
