@@ -11,11 +11,18 @@
     <sprite>sprites\sFireBro</sprite>
     <sprite>sprites\sAttack</sprite>
     <sprite>sprites\sAttackPossibility</sprite>
+    <sprite>sprites\menuplaceholder</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
     <background>background\bg_wall</background>
     <background>background\background3_grass</background>
+    <background>background\dungeon1</background>
+    <background>background\dungeon2</background>
+    <background>background\dungeon3</background>
+    <background>background\dungeon4</background>
+    <background>background\dungeon5</background>
+    <background>background\dungeon6</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -29,6 +36,7 @@
     <object>objects\oHero</object>
     <object>objects\oEnemy</object>
     <object>objects\oAttackParticle</object>
+    <object>objects\menu</object>
   </objects>
   <rooms name="rooms">
     <rooms name="OverWorld">

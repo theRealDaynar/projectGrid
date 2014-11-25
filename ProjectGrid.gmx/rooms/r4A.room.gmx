@@ -210,8 +210,8 @@
     <tile bgName="background3_grass" x="512" y="576" w="64" h="64" xo="512" yo="576" id="10000321" name="inst_F0A8C2AF" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="background0" x="512" y="0" w="64" h="64" xo="0" yo="0" id="10000432" name="inst_D2236F5D" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="background0" x="448" y="0" w="64" h="64" xo="64" yo="0" id="10000433" name="inst_704117A7" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bg_wall" x="960" y="320" w="64" h="64" xo="0" yo="64" id="10000434" name="inst_7DECB1DC" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bg_wall" x="960" y="256" w="64" h="64" xo="0" yo="64" id="10000435" name="inst_0F9860BC" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="background3_grass" x="960" y="256" w="64" h="64" xo="960" yo="256" id="10000452" name="inst_169B6BAD" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="background3_grass" x="960" y="320" w="64" h="64" xo="960" yo="320" id="10000453" name="inst_8745539D" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
   </tiles>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>
