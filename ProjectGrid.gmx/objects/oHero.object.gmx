@@ -375,16 +375,16 @@ room_start = 0
 switch(trans_dir)
     {
     case 0:
-room_goto(left_room)
+room_goto(room - 1)
     break;
     case 1:
-room_goto(top_room)
+room_goto(room - 5)
     break;
     case 2:
-room_goto(right_room)
+room_goto(room + 1)
     break
     case 3:
-room_goto(bottom_room)
+room_goto(room + 5)
     }
 }
 </string>
