@@ -23,6 +23,7 @@
     <background>background\dungeon4</background>
     <background>background\dungeon5</background>
     <background>background\dungeon6</background>
+    <background>background\plateauBG</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
