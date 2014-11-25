@@ -34,7 +34,7 @@ if instance_exists(hit_inst)
             instance_destroy()
     }
 }
-alarm[0] = room_speed/20
+alarm[0] = room_speed/15
 </string>
           </argument>
         </arguments>

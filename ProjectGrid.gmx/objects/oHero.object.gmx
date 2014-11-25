@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>turn_speed = room_speed/2.5
-atk_speed = room_speed/2.5
+atk_speed = room_speed/2
 atk_cooldown = false
 move_cooldown = false
 key_log = ds_list_create()
@@ -484,10 +484,40 @@ room_goto(bottom_room)
             <kind>1</kind>
             <string>if room_start = 0 and dd = false
 {
-    draw_sprite_ext(sAttackPossibility,0,x,y + 64,1,1,0,c_white,.3)
-    draw_sprite_ext(sAttackPossibility,0,x,y - 64,1,1,0,c_white,.3)
-    draw_sprite_ext(sAttackPossibility,0,x + 64,y,1,1,0,c_white,.3)
-    draw_sprite_ext(sAttackPossibility,0,x - 64,y,1,1,0,c_white,.3)
+    var s1 = surface_create(64,64)
+    surface_set_target(s1)
+    if atk_cooldown =true
+    {
+        //this code draws the sprite at the current x and y position of the instance
+        
+        var i, steps, xx, yy, u, v, radius, amount, tex;
+        tex = sprite_get_texture(sAttackPossibility,0)
+        radius = 64
+        amount = (alarm[1]-atk_speed)/atk_speed*360
+        steps = 20; //this value sets the precision of the circle (the larger the more precise)
+        
+        draw_set_color(c_white);
+        draw_primitive_begin_texture(pr_trianglefan,tex);
+        draw_vertex_texture(radius/2,radius/2,0.5,0.5);
+        for(i = 0; i &lt;= steps; i += 1)
+        {
+          xx = radius + lengthdir_x(radius, 90+ amount * i / steps);
+          yy = radius + lengthdir_y(radius, 90+ amount * i / steps);  
+          u = xx/(radius*2);
+          v = yy/(radius*2);
+          draw_vertex_texture(xx-radius/2,yy-radius/2,u,v);
+        }
+        draw_primitive_end();
+    }
+    else
+        draw_sprite(sAttackPossibility,0,0,0)
+    surface_reset_target()
+    draw_set_alpha(.3)
+    draw_surface(s1,x,y+64)
+    draw_surface(s1,x,y-64)
+    draw_surface(s1,x+64,y)
+    draw_surface(s1,x-64,y)
+    draw_set_alpha(1)
     draw_self()
 }
 </string>
