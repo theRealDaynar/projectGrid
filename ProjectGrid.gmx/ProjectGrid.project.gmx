@@ -12,6 +12,8 @@
     <sprite>sprites\sAttack</sprite>
     <sprite>sprites\sAttackPossibility</sprite>
     <sprite>sprites\menuplaceholder</sprite>
+    <sprite>sprites\sTribeMan</sprite>
+    <sprite>sprites\sTribeManOrb</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -36,6 +38,8 @@
   <objects name="objects">
     <object>objects\oHero</object>
     <object>objects\oEnemy</object>
+    <object>objects\oTribeMan</object>
+    <object>objects\oFireBro</object>
     <object>objects\oAttackParticle</object>
     <object>objects\menu</object>
   </objects>

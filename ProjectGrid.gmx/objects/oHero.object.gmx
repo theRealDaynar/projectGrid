@@ -554,7 +554,7 @@ if surface_exists(mini_map)
     else
         draw_sprite(sAttackPossibility,0,0,0)
     surface_reset_target()
-    draw_set_alpha(.3)
+    draw_set_alpha(.2)
     draw_surface(s1,x,y+64)
     draw_surface(s1,x,y-64)
     draw_surface(s1,x+64,y)
