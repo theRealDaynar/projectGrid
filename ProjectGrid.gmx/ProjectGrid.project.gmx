@@ -26,6 +26,7 @@
     <background>background\dungeon5</background>
     <background>background\dungeon6</background>
     <background>background\plateauBG</background>
+    <background>background\bluethron</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">

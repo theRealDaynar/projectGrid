@@ -44,6 +44,7 @@ orb_xprevious = orb_x
 orb_yprevious = orb_y
 orb_dir = 1
 orb_angle = 0
+anim = 0
 </string>
           </argument>
         </arguments>
@@ -353,6 +354,30 @@ orb_angle+=5
         </arguments>
       </action>
     </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>anim+=0.5
+if (anim&gt;7) {anim=0}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -370,7 +395,7 @@ orb_angle+=5
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(sTribeManOrb,0,orb_x +32,orb_y+32,1,1,orb_angle,c_white,1)
+            <string>draw_sprite_ext(sTribeManOrb,anim,orb_x +32,orb_y+32,1,1,orb_angle,c_white,1)
 draw_self()
 </string>
           </argument>
