@@ -32,16 +32,17 @@ true_x = x
 true_y = y
 image_speed = 0
 
-orbit_speed = room_speed
+orbit_speed = room_speed/2
 alarm[2] = orbit_speed
 orb_hspeed = 0
 orb_vspeed = 0
-true_orb_x = x + 64
-true_orb_y = y
-orb_x = true_orb_x
-orb_y = true_orb_y
-orb_xprevious = true_orb_x
-orb_yprevious = true_orb_y
+true_orb_x = 64
+true_orb_y = 0
+orb_x = true_orb_x + x
+orb_y = true_orb_y + y
+orb_xprevious = orb_x
+orb_yprevious = orb_y
+orb_dir = 1
 </string>
           </argument>
         </arguments>
@@ -65,6 +66,69 @@ orb_yprevious = true_orb_y
           <argument>
             <kind>1</kind>
             <string>ds_grid_set(grid_map,true_x/64,true_y/64,0)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>orb_x = true_orb_x + x
+orb_y = true_orb_y + y
+orb_vspeed=0
+orb_hspeed=0
+alarm[2]=orbit_speed
+if round(orb_x/64) = round((x + 64)/64) and round((y - 64)/64) &lt; round(orb_y/64)
+{
+    orb_vspeed = -64/alarm[2]
+    true_orb_y -= 64 
+}
+else if round(orb_x/64) &gt; round((x - 64)/64) and round((y - 64)/64) = round(orb_y/64)
+{
+    orb_hspeed = -64/alarm[2]
+    true_orb_x -= 64 
+}
+else if round(orb_x/64) = round((x - 64)/64) and round((y + 64)/64) &gt; round(orb_y/64)
+{
+    orb_vspeed = 64/alarm[2]
+    true_orb_y += 64 
+}
+else if round(orb_x/64) &lt; round((x + 64)/64) and round((y + 64)/64) = round(orb_y/64)
+{
+    orb_hspeed = 64/alarm[2]
+    true_orb_x += 64 
+}
+if ds_grid_get(grid_map,(true_x + true_orb_x)/64,(true_y + true_orb_y)/64)!=0
+{
+    if orb_dir = 1
+        orb_dir = -1
+    else
+        orb_dir = -1 
+}
+/*
+if round(orb_x/64) = x + 64 and round(orb_y/64) &lt;= y
+    orb_vspeed = alarm[2]/orbit_speed
+else if round(orb_x/64) = x - orb_max_x and round(orb_y/64) &lt;= y
+    orb_vspeed -= alarm[2]/orbit_speed
+else if round(orb_y/64) = y + orb_max_y and round(orb_x/64) &lt;= x
+    orb_hspeed = alarm[2]/orbit_speed
+else if round(orb_y/64) = y - orb_max_y and round(orb_x/64) &lt;= x
+    orb_hspeed -= alarm[2]/orbit_speed
 </string>
           </argument>
         </arguments>
@@ -279,7 +343,7 @@ orb_y += vspeed + orb_vspeed
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(sTribeManOrb,0,orb_x,orb_x)
+            <string>draw_sprite(sTribeManOrb,0,orb_x,orb_y)
 draw_self()
 </string>
           </argument>
