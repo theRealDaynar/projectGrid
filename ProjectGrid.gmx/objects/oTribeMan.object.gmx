@@ -27,7 +27,6 @@
             <kind>1</kind>
             <string>turn_speed = room_speed*1.5
 alarm[0] = turn_speed
-ramming = false
 true_x = x
 true_y = y
 image_speed = 0
@@ -44,7 +43,10 @@ orb_xprevious = orb_x
 orb_yprevious = orb_y
 orb_dir = 1
 orb_angle = 0
+orb_dist = 1
 anim = 0
+atk_timer = orbit_speed * 15
+alarm[3] = atk_timer
 </string>
           </argument>
         </arguments>
@@ -68,6 +70,70 @@ anim = 0
           <argument>
             <kind>1</kind>
             <string>ds_grid_set(grid_map,true_x/64,true_y/64,0)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if orb_dist = 1
+{
+    orb_dist = 2
+    alarm[3] = atk_timer
+    if orb_hspeed != 0
+{
+    true_orb_y*=orb_dist
+    //if orb_dist &gt; 1
+        orb_vspeed = sign(true_orb_y)*64/alarm[2]
+    //else
+        //orb_vspeed = -sign(true_orb_y)*64/alarm[2]
+}
+else if orb_vspeed != 0
+{
+    true_orb_x*=orb_dist
+    //if orb_dist &gt; 1
+        orb_hspeed = sign(true_orb_x)*64/alarm[2]
+    //else
+        //orb_hspeed = -sign(true_orb_x)*64/alarm[2]
+}
+}
+else
+{
+    orb_dist = 1
+    alarm[3] = atk_timer
+    if orb_hspeed != 0
+{
+    true_orb_y/=2
+    //if orb_dist &gt; 1
+        //orb_vspeed = -sign(true_orb_y)*64/alarm[2]
+    //else
+        orb_vspeed = -sign(true_orb_y)*64/alarm[2]
+}
+else if orb_vspeed != 0
+{
+    true_orb_x/=2
+    //if orb_dist &gt; 1
+        //orb_hspeed = -sign(true_orb_x)*64/alarm[2]
+    //else
+        orb_hspeed = -sign(true_orb_x)*64/alarm[2]
+}
+}
 </string>
           </argument>
         </arguments>
@@ -97,22 +163,22 @@ orb_hspeed=0
 alarm[2]=orbit_speed
 if orb_dir = 1
 {
-if round(orb_x/64) = round((x + 64)/64) and round((y - 64)/64) &lt; round(orb_y/64)
+if round(orb_x/64) = round((x + 64 * orb_dist)/64) and round((y - 64 * orb_dist)/64) &lt; round(orb_y/64)
 {
     orb_vspeed = -64/alarm[2]
     true_orb_y -= 64
 }
-else if round(orb_x/64) &gt; round((x - 64)/64) and round((y - 64)/64) = round(orb_y/64)
+else if round(orb_x/64) &gt; round((x - 64 * orb_dist)/64) and round((y - 64 * orb_dist)/64) = round(orb_y/64)
 {
     orb_hspeed = -64/alarm[2]
     true_orb_x -= 64
 }
-else if round(orb_x/64) = round((x - 64)/64) and round((y + 64)/64) &gt; round(orb_y/64)
+else if round(orb_x/64) = round((x - 64 * orb_dist)/64) and round((y + 64 * orb_dist)/64) &gt; round(orb_y/64)
 {
     orb_vspeed = 64/alarm[2]
     true_orb_y += 64
 }
-else if round(orb_x/64) &lt; round((x + 64)/64) and round((y + 64)/64) = round(orb_y/64)
+else if round(orb_x/64) &lt; round((x + 64 * orb_dist)/64) and round((y + 64 * orb_dist)/64) = round(orb_y/64)
 {
     orb_hspeed = 64/alarm[2]
     true_orb_x += 64
@@ -120,22 +186,22 @@ else if round(orb_x/64) &lt; round((x + 64)/64) and round((y + 64)/64) = round(o
 }
 else
 {
-if round(orb_x/64) = round((x + 64)/64) and round((y + 64)/64) &gt; round(orb_y/64)
+if round(orb_x/64) = round((x + 64 * orb_dist)/64) and round((y + 64 * orb_dist)/64) &gt; round(orb_y/64)
 {
     orb_vspeed = 64/alarm[2]
     true_orb_y += 64
 }
-else if round(orb_x/64) &lt; round((x + 64)/64) and round((y - 64)/64) = round(orb_y/64)
+else if round(orb_x/64) &lt; round((x + 64 * orb_dist)/64) and round((y - 64 * orb_dist)/64) = round(orb_y/64)
 {
     orb_hspeed = 64/alarm[2]
     true_orb_x += 64
 }
-else if round(orb_x/64) = round((x - 64)/64) and round((y - 64)/64) &lt; round(orb_y/64)
+else if round(orb_x/64) = round((x - 64 * orb_dist)/64) and round((y - 64 * orb_dist)/64) &lt; round(orb_y/64)
 {
     orb_vspeed = -64/alarm[2]
     true_orb_y -= 64
 }
-else if round(orb_x/64) &gt; round((x - 64)/64) and round((y + 64)/64) = round(orb_y/64)
+else if round(orb_x/64) &gt; round((x - 64 * orb_dist)/64) and round((y + 64 * orb_dist)/64) = round(orb_y/64)
 {
     orb_hspeed = -64/alarm[2]
     true_orb_x -= 64
@@ -211,40 +277,6 @@ x = true_x
 y = true_y
 xprevious = true_x
 yprevious = true_y
-if ramming = false
-{
-if oHero.x = x
-{
-    var v = sign(oHero.y - y)
-    ramming = 2 + v
-    var i = y/64 + v
-    while( i != oHero.y/64)
-    {
-        if ds_grid_get(grid_map,x/64,i) != 0
-        {
-            ramming = false
-            break;
-        }
-        i+=v
-    } 
-}
-else if oHero.y = y
-{
-    var v = sign(oHero.x - x)
-    ramming = 3 + v
-    var i = x/64+ v
-    while( i != oHero.x/64)
-    {
-        if ds_grid_get(grid_map,i,y/64) != 0
-        {
-            ramming = false
-            break;
-        }
-        i+=v
-    } 
-}
-if ramming = false
-{
     var i = 0
     while(i &lt; 4)
     {
@@ -275,55 +307,17 @@ if ramming = false
     }
     i++
     }
-}
 alarm[0] = turn_speed
-}else
-{
-switch(ramming)
-{
-    case 1:
-        y-=64;
-    break;
-    case 3:
-        y+=64;
-    break;
-    case 2:
-        x-=64;
-    break;
-    case 4:
-        x+=64;
-}
-if ds_grid_get(grid_map,x/64,y/64) != 0 or x &lt; 0 or y &lt; 0 or x &gt;= 64*16 or y &gt;= 64*10 
-{
-    y = yprevious
-    x = xprevious
-    ramming = false
-}
-else
-{
-    ds_grid_set(grid_map,xprevious/64,yprevious/64,0)
-    ds_grid_set(grid_map,x/64,y/64,id)
-}
-alarm[0] = turn_speed/6
-}
 if x!=xprevious or y!=yprevious
 {
     true_x = x
     true_y = y
-    if ramming = false
-    {
         speed = 64/(alarm[0]/2)
         alarm[1] = alarm[0]/2
-    }
-    else
-    {
-        speed = 64/alarm[0]
-    }
     direction = point_direction(xprevious,yprevious,true_x,true_y)
     y = yprevious
     x = xprevious
 }
-if (ramming=false) {image_index=0} else {image_index=1}
 </string>
           </argument>
         </arguments>
