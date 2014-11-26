@@ -85,6 +85,8 @@ case 3:
 break;
 }
 dd = false
+yprevious = y
+xprevious = x
 </string>
           </argument>
         </arguments>
@@ -220,7 +222,7 @@ randomize()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if move_cooldown = false and ds_list_size(key_log) &gt; 0 and room_start &lt;= 0
+            <string>if move_cooldown = false and ds_list_size(key_log) &gt; 0 and room_start &lt;= 0 and dd = false
 {
     switch(ds_list_find_value(key_log, ds_list_size(key_log)-1))
     {

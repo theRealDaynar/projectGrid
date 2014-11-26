@@ -32,7 +32,7 @@ true_x = x
 true_y = y
 image_speed = 0
 
-orbit_speed = room_speed/2
+orbit_speed = room_speed/4
 alarm[2] = orbit_speed
 orb_hspeed = 0
 orb_vspeed = 0
@@ -43,6 +43,7 @@ orb_y = true_orb_y + y
 orb_xprevious = orb_x
 orb_yprevious = orb_y
 orb_dir = 1
+orb_angle = 0
 </string>
           </argument>
         </arguments>
@@ -93,32 +94,58 @@ orb_y = true_orb_y + y
 orb_vspeed=0
 orb_hspeed=0
 alarm[2]=orbit_speed
+if orb_dir = 1
+{
 if round(orb_x/64) = round((x + 64)/64) and round((y - 64)/64) &lt; round(orb_y/64)
 {
     orb_vspeed = -64/alarm[2]
-    true_orb_y -= 64 
+    true_orb_y -= 64
 }
 else if round(orb_x/64) &gt; round((x - 64)/64) and round((y - 64)/64) = round(orb_y/64)
 {
     orb_hspeed = -64/alarm[2]
-    true_orb_x -= 64 
+    true_orb_x -= 64
 }
 else if round(orb_x/64) = round((x - 64)/64) and round((y + 64)/64) &gt; round(orb_y/64)
 {
     orb_vspeed = 64/alarm[2]
-    true_orb_y += 64 
+    true_orb_y += 64
 }
 else if round(orb_x/64) &lt; round((x + 64)/64) and round((y + 64)/64) = round(orb_y/64)
 {
     orb_hspeed = 64/alarm[2]
-    true_orb_x += 64 
+    true_orb_x += 64
+}
+}
+else
+{
+if round(orb_x/64) = round((x + 64)/64) and round((y + 64)/64) &gt; round(orb_y/64)
+{
+    orb_vspeed = 64/alarm[2]
+    true_orb_y += 64
+}
+else if round(orb_x/64) &lt; round((x + 64)/64) and round((y - 64)/64) = round(orb_y/64)
+{
+    orb_hspeed = 64/alarm[2]
+    true_orb_x += 64
+}
+else if round(orb_x/64) = round((x - 64)/64) and round((y - 64)/64) &lt; round(orb_y/64)
+{
+    orb_vspeed = -64/alarm[2]
+    true_orb_y -= 64
+}
+else if round(orb_x/64) &gt; round((x - 64)/64) and round((y + 64)/64) = round(orb_y/64)
+{
+    orb_hspeed = -64/alarm[2]
+    true_orb_x -= 64
+}
 }
 if ds_grid_get(grid_map,(true_x + true_orb_x)/64,(true_y + true_orb_y)/64)!=0
 {
     if orb_dir = 1
         orb_dir = -1
     else
-        orb_dir = -1 
+        orb_dir = 1 
 }
 /*
 if round(orb_x/64) = x + 64 and round(orb_y/64) &lt;= y
@@ -320,7 +347,7 @@ if (ramming=false) {image_index=0} else {image_index=1}
             <kind>1</kind>
             <string>orb_x += hspeed + orb_hspeed
 orb_y += vspeed + orb_vspeed
-
+orb_angle+=5
 </string>
           </argument>
         </arguments>
@@ -343,7 +370,7 @@ orb_y += vspeed + orb_vspeed
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(sTribeManOrb,0,orb_x,orb_y)
+            <string>draw_sprite_ext(sTribeManOrb,0,orb_x +32,orb_y+32,1,1,orb_angle,c_white,1)
 draw_self()
 </string>
           </argument>
