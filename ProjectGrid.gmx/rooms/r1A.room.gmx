@@ -54,9 +54,6 @@ make_collision_grid()</code>
   </views>
   <instances>
     <instance objName="oHero" x="384" y="256" name="inst_7A4FB9CF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oEnemy" x="192" y="192" name="inst_0681892F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oEnemy" x="832" y="64" name="inst_58E5C467" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oEnemy" x="640" y="448" name="inst_360EF70E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oTribeMan" x="512" y="192" name="inst_59241284" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
