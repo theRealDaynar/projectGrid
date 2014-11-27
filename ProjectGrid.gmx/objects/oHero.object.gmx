@@ -47,6 +47,7 @@ dd = false
 mini_map = surface_create(5*8*4,6*5*4)
 hp = 4
 weapon_array = change_weapon(1)
+s1 = surface_create(64,64)
 </string>
           </argument>
         </arguments>
@@ -608,8 +609,10 @@ for(var i = 0; i &lt; hp; i++)
             <kind>1</kind>
             <string>if room_start = 0 and dd = false
 {
-    var s1 = surface_create(64,64)
+    if !surface_exists(s1)
+        s1 = surface_create(64,64)
     surface_set_target(s1)
+    draw_clear_alpha(c_white,0)
     if atk_cooldown =true
     {
         //this code draws the sprite at the current x and y position of the instance
@@ -647,7 +650,6 @@ for(var i = 0; i &lt; hp; i++)
         draw_surface(s1,x-64*weapon_array[i],y)
     draw_set_alpha(1)
     draw_self()
-    surface_free(s1)
 }
 </string>
           </argument>

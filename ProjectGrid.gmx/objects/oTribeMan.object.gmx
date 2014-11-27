@@ -214,7 +214,7 @@ else if round(orb_x/64) &gt; round((x - 64 * orb_dist)/64) and round((y + 64 * o
     true_orb_x -= 64
 }
 }
-if ds_grid_get(grid_map,(true_x + true_orb_x)/64,(true_y + true_orb_y)/64)!=0
+if ds_grid_get(grid_map,(true_x + true_orb_x)/64,(true_y + true_orb_y)/64)!=0 or  x &lt; 0  or y &lt; 0 or x &gt;= 64*16
 {
     if orb_dir = 1
         orb_dir = -1
