@@ -44,6 +44,7 @@
     <object>objects\oFireBro</object>
     <object>objects\oAttackParticle</object>
     <object>objects\menu</object>
+    <object>objects\oFireBall</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\TPROOM</room>
