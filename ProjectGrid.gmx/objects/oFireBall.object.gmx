@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>image_speed=.2
-turn_speed = room_speed/3
+turn_speed = room_speed/6
 alarm[0] = turn_speed
 </string>
           </argument>
