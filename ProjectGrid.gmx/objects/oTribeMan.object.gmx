@@ -219,6 +219,8 @@ if ds_grid_get(grid_map,(true_x + true_orb_x)/64,(true_y + true_orb_y)/64)!=0
         orb_dir = -1
     else
         orb_dir = 1 
+    if ds_grid_get(grid_map,(true_x + true_orb_x)/64,(true_y + true_orb_y)/64).object_index = oHero
+        oHero.hp -- 
 }
 /*
 if round(orb_x/64) = x + 64 and round(orb_y/64) &lt;= y

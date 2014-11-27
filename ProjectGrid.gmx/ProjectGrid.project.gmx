@@ -15,6 +15,7 @@
     <sprite>sprites\sTribeMan</sprite>
     <sprite>sprites\sTribeManOrb</sprite>
     <sprite>sprites\sFireball</sprite>
+    <sprite>sprites\sprite9_bestsprite</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>

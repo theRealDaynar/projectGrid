@@ -45,6 +45,7 @@ room_start = -1
 room_trans = room_speed
 dd = false
 mini_map = surface_create(5*8*4,6*5*4)
+hp = 4
 </string>
           </argument>
         </arguments>
@@ -504,6 +505,11 @@ room_goto(room + 5)
 }
 if surface_exists(mini_map)
     draw_surface(mini_map,room_width - surface_get_width(mini_map),room_height - surface_get_height(mini_map))
+    
+for(var i = 0; i &lt; hp; i++)
+{
+    draw_sprite(sprite9_bestsprite,0,70+i*70, room_height - 100)
+}
 </string>
           </argument>
         </arguments>

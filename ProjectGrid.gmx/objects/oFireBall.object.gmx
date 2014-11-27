@@ -54,7 +54,11 @@ alarm[0] = turn_speed
 speed = 64/turn_speed
 alarm[0] = turn_speed
 if ds_grid_get(grid_map,round(x+sign(hspeed)*64)/64,round(y+sign(vspeed)*64)/64) != 0
+{
+    if ds_grid_get(grid_map,round(x+sign(hspeed)*64)/64,round(y+sign(vspeed)*64)/64).object_index = oHero
+         oHero.hp --
     instance_destroy()
+}
 </string>
           </argument>
         </arguments>

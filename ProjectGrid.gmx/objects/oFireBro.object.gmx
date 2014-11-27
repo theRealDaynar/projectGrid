@@ -192,6 +192,8 @@ switch(ramming)
 }
 if ds_grid_get(grid_map,x/64,y/64) != 0 or x &lt; 0 or y &lt; 0 or x &gt;= 64*16 or y &gt;= 64*10 
 {
+    if ds_grid_get(grid_map,x/64,y/64).object_index = oHero
+        oHero.hp--
     y = yprevious
     x = xprevious
     instance_destroy()

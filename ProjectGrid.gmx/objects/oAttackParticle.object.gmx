@@ -30,7 +30,7 @@ if instance_exists(hit_inst)
 {  
     with(hit_inst)
     {
-        if object_index = oEnemy
+        if object_is_ancestor(object_index,oEnemy)
             instance_destroy()
     }
 }
