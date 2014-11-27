@@ -94,24 +94,29 @@ alarm[3] = atk_timer
             <kind>1</kind>
             <string>if orb_dist = 1
 {
-    orb_dist = 2
-    alarm[3] = atk_timer
-    if orb_hspeed != 0
-{
-    true_orb_y*=orb_dist
-    //if orb_dist &gt; 1
-        orb_vspeed = sign(true_orb_y)*64/alarm[2]
-    //else
-        //orb_vspeed = -sign(true_orb_y)*64/alarm[2]
-}
-else if orb_vspeed != 0
-{
-    true_orb_x*=orb_dist
-    //if orb_dist &gt; 1
-        orb_hspeed = sign(true_orb_x)*64/alarm[2]
-    //else
-        //orb_hspeed = -sign(true_orb_x)*64/alarm[2]
-}
+ if ds_grid_get(grid_map,(x + true_orb_x*2)/64,(y + true_orb_y*2)/64)=0
+    {
+        orb_dist = 2
+        alarm[3] = atk_timer
+        if orb_hspeed != 0
+        {
+                true_orb_y*=orb_dist
+                //if orb_dist &gt; 1
+                    orb_vspeed = sign(true_orb_y)*64/alarm[2]
+                //else
+                    //orb_vspeed = -sign(true_orb_y)*64/alarm[2]
+        }
+        else if orb_vspeed != 0
+        {
+                true_orb_x*=orb_dist
+                //if orb_dist &gt; 1
+                    orb_hspeed = sign(true_orb_x)*64/alarm[2]
+                //else
+                    //orb_hspeed = -sign(true_orb_x)*64/alarm[2]
+        }
+    }
+    else
+        alarm[3] = atk_timer/2
 }
 else
 {
@@ -297,7 +302,7 @@ if orb_dist = 1
         case 3:
             x+=64;
     }
-    if ds_grid_get(grid_map,x/64,y/64) != 0  or  x &lt; 0  or y &lt; 0 or x &gt;= 64*16 or y &gt;= 64*10 
+    if ds_grid_get(grid_map,x/64,y/64) != 0  or  x &lt; 0  or y &lt; 0 or x &gt;= 64*16 or y &gt;= 64*10 or ds_grid_get(grid_map,(x + true_orb_x)/64,(y + true_orb_y)/64)!=0
     {
         y = yprevious
         x = xprevious
