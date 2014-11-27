@@ -27,7 +27,7 @@
     <background>background\dungeon5</background>
     <background>background\dungeon6</background>
     <background>background\plateauBG</background>
-    <background>background\bluethron</background>
+    <background>background\bluethorn</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -46,6 +46,7 @@
     <object>objects\menu</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\TPROOM</room>
     <rooms name="OverWorld">
       <room>rooms\r1A</room>
       <room>rooms\r1B</room>

@@ -31,7 +31,7 @@ true_x = x
 true_y = y
 image_speed = 0
 
-orbit_speed = room_speed/4
+orbit_speed = room_speed/6
 alarm[2] = orbit_speed
 orb_hspeed = 0
 orb_vspeed = 0
@@ -45,7 +45,7 @@ orb_dir = 1
 orb_angle = 0
 orb_dist = 1
 anim = 0
-atk_timer = orbit_speed * 16
+atk_timer = orbit_speed * 26
 alarm[3] = atk_timer
 </string>
           </argument>
