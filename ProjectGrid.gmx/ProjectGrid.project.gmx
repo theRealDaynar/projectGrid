@@ -34,6 +34,7 @@
   <scripts name="scripts">
     <script>scripts\update_key_log.gml</script>
     <script>scripts\make_collision_grid.gml</script>
+    <script>scripts\change_weapon.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_circle_timer.shader</shader>

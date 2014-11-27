@@ -47,6 +47,7 @@ orb_dist = 1
 anim = 0
 atk_timer = orbit_speed * 26
 alarm[3] = atk_timer
+hp = 3
 </string>
           </argument>
         </arguments>

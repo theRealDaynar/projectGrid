@@ -46,6 +46,7 @@ room_trans = room_speed
 dd = false
 mini_map = surface_create(5*8*4,6*5*4)
 hp = 4
+weapon_array = change_weapon(1)
 </string>
           </argument>
         </arguments>
@@ -285,20 +286,93 @@ if atk_cooldown = false and ds_list_size(atk_key_log) &gt; 0
     switch(ds_list_find_value(atk_key_log, ds_list_size(atk_key_log)-1))
     {
     case 4:
-        instance_create(x,y - 64,oAttackParticle)
+    for(var i = 1; i&lt;=weapon_array[0];i++)
+        instance_create(x,y - 64*weapon_array[i],oAttackParticle)
     break;
     case 5:
-        instance_create(x,y + 64,oAttackParticle)
+    for(var i = 1; i&lt;=weapon_array[0];i++)
+        instance_create(x,y + 64*weapon_array[i],oAttackParticle)
     break;
     case 6:
-        instance_create(x - 64,y,oAttackParticle)
+    for(var i = 1; i&lt;=weapon_array[0];i++)
+        instance_create(x - 64*weapon_array[i],y,oAttackParticle)
     break;
     case 7:
-        instance_create(x + 64,y,oAttackParticle)
+    for(var i = 1; i&lt;=weapon_array[0];i++)
+        instance_create(x + 64*weapon_array[i],y,oAttackParticle)
     }
     atk_cooldown = true
     alarm[1] = atk_speed
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="5" enumb="51">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>weapon_array = change_weapon(3)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="5" enumb="50">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>weapon_array = change_weapon(2)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="5" enumb="49">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>weapon_array = change_weapon(1)
 </string>
           </argument>
         </arguments>
@@ -563,10 +637,14 @@ for(var i = 0; i &lt; hp; i++)
         draw_sprite(sAttackPossibility,0,0,0)
     surface_reset_target()
     draw_set_alpha(.2)
-    draw_surface(s1,x,y+64)
-    draw_surface(s1,x,y-64)
-    draw_surface(s1,x+64,y)
-    draw_surface(s1,x-64,y)
+    for(var i = 1; i&lt;=weapon_array[0];i++)
+        draw_surface(s1,x,y+64*weapon_array[i])
+    for(var i = 1; i&lt;=weapon_array[0];i++)
+        draw_surface(s1,x,y-64*weapon_array[i])
+    for(var i = 1; i&lt;=weapon_array[0];i++)
+        draw_surface(s1,x+64*weapon_array[i],y)
+    for(var i = 1; i&lt;=weapon_array[0];i++)
+        draw_surface(s1,x-64*weapon_array[i],y)
     draw_set_alpha(1)
     draw_self()
     surface_free(s1)
