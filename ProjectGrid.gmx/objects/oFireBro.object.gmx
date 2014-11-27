@@ -241,7 +241,7 @@ else
     ds_grid_set(grid_map,xprevious/64,yprevious/64,0)
     ds_grid_set(grid_map,x/64,y/64,id)
 }
-alarm[0] = turn_speed/6
+alarm[0] = turn_speed/8
 }
 if x!=xprevious or y!=yprevious
 {
