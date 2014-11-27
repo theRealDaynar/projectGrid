@@ -563,6 +563,7 @@ if surface_exists(mini_map)
     draw_surface(s1,x-64,y)
     draw_set_alpha(1)
     draw_self()
+    surface_free(s1)
 }
 </string>
           </argument>
