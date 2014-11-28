@@ -16,6 +16,7 @@
     <sprite>sprites\sTribeManOrb</sprite>
     <sprite>sprites\sFireball</sprite>
     <sprite>sprites\sprite9_bestsprite</sprite>
+    <sprite>sprites\sprite10_bone_snake</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -47,6 +48,7 @@
     <object>objects\oAttackParticle</object>
     <object>objects\menu</object>
     <object>objects\oFireBall</object>
+    <object>objects\oBoneSprite</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\TPROOM</room>

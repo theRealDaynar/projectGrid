@@ -640,6 +640,7 @@ room_goto(room + 5)
             draw_surface(old_room_surface,xx, yy)
      draw_sprite_ext(sprite_index,image_index,px,py,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
 }
+draw_rectangle(0,640,room_width,room_height,false)
 if surface_exists(mini_map)
     draw_surface(mini_map,room_width - surface_get_width(mini_map),room_height - surface_get_height(mini_map))
     
