@@ -9,8 +9,8 @@
   <bboxmode>0</bboxmode>
   <bbox_left>0</bbox_left>
   <bbox_right>63</bbox_right>
-  <bbox_top>1</bbox_top>
-  <bbox_bottom>62</bbox_bottom>
+  <bbox_top>0</bbox_top>
+  <bbox_bottom>63</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
@@ -23,5 +23,7 @@
     <frame index="0">images\sprite10_bone_snake_0.png</frame>
     <frame index="1">images\sprite10_bone_snake_1.png</frame>
     <frame index="2">images\sprite10_bone_snake_2.png</frame>
+    <frame index="3">images\sprite10_bone_snake_3.png</frame>
+    <frame index="4">images\sprite10_bone_snake_4.png</frame>
   </frames>
 </sprite>
