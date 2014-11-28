@@ -20,7 +20,8 @@
   <width>64</width>
   <height>64</height>
   <frames>
-    <frame index="0">images\sprite10_bone_snake_0.png</frame>
-    <frame index="1">images\sprite10_bone_snake_1.png</frame>
+    <frame index="0">images\sSnnakeButt_0.png</frame>
+    <frame index="1">images\sSnnakeButt_1.png</frame>
+    <frame index="2">images\sSnnakeButt_2.png</frame>
   </frames>
 </sprite>

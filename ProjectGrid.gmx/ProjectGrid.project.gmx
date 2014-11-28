@@ -17,6 +17,7 @@
     <sprite>sprites\sFireball</sprite>
     <sprite>sprites\sprite9_bestsprite</sprite>
     <sprite>sprites\sprite10_bone_snake</sprite>
+    <sprite>sprites\sSnnakeButt</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -40,6 +41,7 @@
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_circle_timer.shader</shader>
   </shaders>
+  <fonts name="fonts"/>
   <objects name="objects">
     <object>objects\oHero</object>
     <object>objects\oEnemy</object>
