@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>turn_speed = room_speed/10
+            <string>turn_speed = room_speed/2.5
 atk_speed = room_speed/2
 atk_cooldown = false
 move_cooldown = false
@@ -55,6 +55,43 @@ room_history[i,1] = x
 room_history[i,2] = y
 }
 dest_index = 0
+//event_perform(ev_other,ev_room_start)
+alarm[11] = 1
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if !surface_exists(mini_map)
+    mini_map = surface_create(5*8*4,6*5*4)
+surface_set_target(mini_map)
+draw_clear(c_gray)
+for(var i = 1;i&lt;4;i++)
+draw_rectangle_colour((room_history[i,0]-r1A )%5*8*4,floor((room_history[i,0]-r1A)/5)*5*4,4*((room_history[i,0]-r1A)%5*8+8),4*(floor((room_history[i,0] - r1A)/5)*5+5),c_green,c_green,c_green,c_green,false)
+draw_rectangle_colour((room-r1A )%5*8*4,floor((room-r1A)/5)*5*4,4*((room-r1A)%5*8+8),4*(floor((room - r1A)/5)*5+5),c_yellow,c_yellow,c_yellow,c_yellow,false)
+draw_set_colour(c_black)
+for(var i = 8;i&lt;=5*8;i+=8)
+draw_line(i*4,0,i*4,6*5*4)
+for(var i = 5;i&lt;=6*5;i+=5)
+draw_line(0,i*4,5*8*4,i*4)
+surface_reset_target()
 </string>
           </argument>
         </arguments>
@@ -463,6 +500,10 @@ room_history[0,2] = yprevious
 room_start=1
 else
 room_start = 0
+for(var i=0;i&lt;4;i++)
+    if room_history[i,0] = room
+        with(oEnemy)
+            instance_destroy()
 
 var temp_array;
 for(var i=0;i&lt;4;i++)
@@ -662,13 +703,17 @@ for(var i = 0; i &lt; hp; i++)
     surface_reset_target()
     draw_set_alpha(.2)
     for(var i = 1; i&lt;=weapon_array[0];i++)
-        draw_surface(s1,x,y+64*weapon_array[i])
+        if ds_grid_get(grid_map,x/64,(y+64*weapon_array[i])/64) != -1
+            draw_surface(s1,x,y+64*weapon_array[i])
     for(var i = 1; i&lt;=weapon_array[0];i++)
-        draw_surface(s1,x,y-64*weapon_array[i])
+        if ds_grid_get(grid_map,x/64,(y-64*weapon_array[i])/64) != -1
+            draw_surface(s1,x,y-64*weapon_array[i])
     for(var i = 1; i&lt;=weapon_array[0];i++)
-        draw_surface(s1,x+64*weapon_array[i],y)
+        if ds_grid_get(grid_map,(x+64*weapon_array[i])/64,y/64) != -1
+            draw_surface(s1,x+64*weapon_array[i],y)
     for(var i = 1; i&lt;=weapon_array[0];i++)
-        draw_surface(s1,x-64*weapon_array[i],y)
+        if ds_grid_get(grid_map,(x-64*weapon_array[i])/64,y/64) != -1
+            draw_surface(s1,x-64*weapon_array[i],y)
     draw_set_alpha(1)
     draw_self()
 }
