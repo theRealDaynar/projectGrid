@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>turn_speed = room_speed/2.5
+            <string>turn_speed = room_speed/10
 atk_speed = room_speed/2
 atk_cooldown = false
 move_cooldown = false
@@ -48,6 +48,13 @@ mini_map = surface_create(5*8*4,6*5*4)
 hp = 4
 weapon_array = change_weapon(1)
 s1 = surface_create(64,64)
+for(var i=0;i&lt;4;i++)
+{
+room_history[i,0] = room
+room_history[i,1] = x
+room_history[i,2] = y
+}
+dest_index = 0
 </string>
           </argument>
         </arguments>
@@ -225,7 +232,17 @@ randomize()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if move_cooldown = false and ds_list_size(key_log) &gt; 0 and room_start &lt;= 0 and dd = false
+            <string>
+for(var i = 1;i&lt;4;i++)
+if mouse_check_button_pressed(mb_left) and mouse_x &gt; (room_history[i,0]-r1A )%5*8*4 + room_width - surface_get_width(mini_map) and mouse_y &gt; room_height - surface_get_height(mini_map) + floor((room_history[i,0]-r1A)/5)*5*4 and mouse_x &lt; 4*((room_history[i,0]-r1A)%5*8+8) + room_width - surface_get_width(mini_map) and mouse_y &lt; room_height - surface_get_height(mini_map) + 4*(floor((room_history[i,0] - r1A)/5)*5+5)
+{
+room_start = -1
+dest_index = i
+room_goto(room_history[i,0])
+dd=true
+}
+
+if move_cooldown = false and ds_list_size(key_log) &gt; 0 and room_start &lt;= 0 and dd = false
 {
     switch(ds_list_find_value(key_log, ds_list_size(key_log)-1))
     {
@@ -401,40 +418,31 @@ old_room_surface = surface_create(1024,640)
 surface_set_target(old_room_surface)
 draw_surface(application_surface,0,0)
 surface_reset_target()
+if room_start = -1
+{
+    dd = false
+    x=room_history[dest_index-1,1]
+    y=room_history[dest_index-1,2]
+}
+var temp_array;
+for(var i=0;i&lt;4;i++)
+{
+    temp_array[i,1] = room_history[i,1]
+    temp_array[i,2] = room_history[i,2]
+}
+for(var i=1;i&lt;4;i++)
+{
+    room_history[i,1] = temp_array[i-1,1]
+    room_history[i,2] = temp_array[i-1,2]
+}
+room_history[0,1] = xprevious
+room_history[0,2] = yprevious
 </string>
           </argument>
         </arguments>
       </action>
     </event>
     <event eventtype="7" enumb="4">
-      <action>
-        <libid>1</libid>
-        <id>201</id>
-        <kind>0</kind>
-        <userelative>-1</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_create_object</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>10</kind>
-            <object>menu</object>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>0</string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>640</string>
-          </argument>
-        </arguments>
-      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -455,16 +463,29 @@ surface_reset_target()
 room_start=1
 else
 room_start = 0
+
+var temp_array;
+for(var i=0;i&lt;4;i++)
+{
+    temp_array[i,0] = room_history[i,0]
+}
+for(var i=1;i&lt;4;i++)
+{
+    room_history[i,0] = temp_array[i-1,0]
+}
+room_history[0,0] = room
 if !surface_exists(mini_map)
     mini_map = surface_create(5*8*4,6*5*4)
 surface_set_target(mini_map)
 draw_clear(c_gray)
+for(var i = 1;i&lt;4;i++)
+draw_rectangle_colour((room_history[i,0]-r1A )%5*8*4,floor((room_history[i,0]-r1A)/5)*5*4,4*((room_history[i,0]-r1A)%5*8+8),4*(floor((room_history[i,0] - r1A)/5)*5+5),c_green,c_green,c_green,c_green,false)
+draw_rectangle_colour((room-r1A )%5*8*4,floor((room-r1A)/5)*5*4,4*((room-r1A)%5*8+8),4*(floor((room - r1A)/5)*5+5),c_yellow,c_yellow,c_yellow,c_yellow,false)
 draw_set_colour(c_black)
 for(var i = 8;i&lt;=5*8;i+=8)
 draw_line(i*4,0,i*4,6*5*4)
 for(var i = 5;i&lt;=6*5;i+=5)
 draw_line(0,i*4,5*8*4,i*4)
-draw_rectangle_colour((room-r1A )%5*8*4,floor((room-r1A)/5)*5*4,4*((room-r1A)%5*8+8),4*(floor((room - r1A)/5)*5+5),c_yellow,c_yellow,c_yellow,c_yellow,false)
 surface_reset_target()
 </string>
           </argument>

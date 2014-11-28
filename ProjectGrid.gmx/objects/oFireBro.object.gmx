@@ -192,12 +192,14 @@ switch(ramming)
         x+=64;
 }
 if ds_grid_get(grid_map,x/64,y/64) != 0 or x &lt; 0 or y &lt; 0 or x &gt;= 64*16 or y &gt;= 64*10 
-{
+{   
     if ds_grid_get(grid_map,x/64,y/64).object_index = oHero
+    {
         oHero.hp--
+    }else
+    {
     y = yprevious
     x = xprevious
-    instance_destroy()
     if ds_grid_get(grid_map,x/64+1,y/64) = 0
         instance_create(x+64,y,oFireBall)
     if ds_grid_get(grid_map,x/64,y/64+1) = 0
@@ -235,6 +237,9 @@ if ds_grid_get(grid_map,x/64,y/64) != 0 or x &lt; 0 or y &lt; 0 or x &gt;= 64*16
         var inst = instance_create(x+64,y+64,oFireBall);
         inst.image_angle = 315
     }
+    }
+    
+    instance_destroy()
 }
 else
 {
