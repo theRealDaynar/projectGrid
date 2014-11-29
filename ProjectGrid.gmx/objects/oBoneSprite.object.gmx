@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>turn_speed = room_speed
+            <string>turn_speed = room_speed / 3
 alarm[0] = turn_speed
 true_x = x
 true_y = y

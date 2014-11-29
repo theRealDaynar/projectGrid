@@ -50,7 +50,7 @@ weapon_array = change_weapon(1)
 s1 = surface_create(64,64)
 for(var i=0;i&lt;4;i++)
 {
-room_history[i,0] = room
+room_history[i,0] = -1
 room_history[i,1] = x
 room_history[i,2] = y
 }
