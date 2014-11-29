@@ -698,7 +698,7 @@ if show_grid = true
         tex = sprite_get_texture(sAttackPossibility,0)
         radius = 64
         amount = (alarm[1]-atk_speed)/atk_speed*360
-        steps = 20; //this value sets the precision of the circle (the larger the more precise)
+        steps = 20; 
         
         draw_set_color(c_white);
         draw_primitive_begin_texture(pr_trianglefan,tex);

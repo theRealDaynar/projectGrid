@@ -3,9 +3,9 @@
   <spriteName>sDumbEyeThing</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>1</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>oEnemy</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>turn_speed = room_speed*15
+            <string>turn_speed = room_speed*7
 tele_true_x = x
 tele_true_y = y
 tele_speed = 0
@@ -33,10 +33,11 @@ tele_dir = 0
 tele_x = x
 tele_y = y
 hp = 1
-tele_turn_speed = turn_speed/90
+tele_turn_speed = turn_speed/40
 image_speed = .2
 alarm[0] = turn_speed
 alarm[1] = tele_turn_speed
+ds_grid_set(grid_map,x/64,y/64,id)
 </string>
           </argument>
         </arguments>
@@ -113,6 +114,22 @@ var tele_y_previous = tele_y
     var i = 0
     while(i &lt; 4)
     {
+    randomize()
+    if random(1) &gt; .8
+    {
+        if oHero.x != tele_x or oHero.y != tele_y
+        if abs(oHero.x - tele_x) &gt; abs(oHero.y - tele_y)
+            if oHero.x &gt; tele_x
+                tele_x+=64
+            else
+                tele_x-=64
+        else
+            if oHero.y &gt; tele_y
+                tele_y+=64
+            else
+                tele_y-=64
+    }
+    else
     switch(irandom(3))
     {
         case 0:
@@ -127,15 +144,15 @@ var tele_y_previous = tele_y
         case 3:
             tele_x+=64;
     }
-    if ds_grid_get(grid_map,tele_x/64,tele_y/64) != 0  or  tele_x &lt; 0  or tele_y &lt; 0 or tele_x &gt;= 64*16 or tele_y &gt;= 64*10 
+    if (ds_grid_get(grid_map,tele_x/64,tele_y/64) != 0 and ds_grid_get(grid_map,tele_x/64,tele_y/64) != oHero.id) or  tele_x &lt; 0  or tele_y &lt; 0 or tele_x &gt;= 64*16 or tele_y &gt;= 64*10 
     {
         tele_y = tele_y_previous
         tele_x = tele_x_previous
     }
     else
     {
-        ds_grid_set(grid_map,tele_x_previous/64,tele_y_previous/64,0)
-        ds_grid_set(grid_map,tele_x/64,tele_y/64,id)
+        //ds_grid_set(grid_map,tele_x_previous/64,tele_y_previous/64,0)
+        //ds_grid_set(grid_map,tele_x/64,tele_y/64,id)
         break;
     }
     i++
@@ -210,7 +227,7 @@ tele_y += lengthdir_y(tele_speed,tele_dir)
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="73">
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -227,7 +244,8 @@ tele_y += lengthdir_y(tele_speed,tele_dir)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(sDumbEyeThing,image_index,tele_x,tele_y,1,1,0,c_purple,.3)
+            <string>draw_self()
+draw_sprite_ext(sDumbEyeThing,image_index,tele_x,tele_y,1,1,0,c_purple,.3)
 </string>
           </argument>
         </arguments>
