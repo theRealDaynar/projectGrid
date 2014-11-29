@@ -41,7 +41,6 @@
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_circle_timer.shader</shader>
   </shaders>
-  <fonts name="fonts"/>
   <objects name="objects">
     <object>objects\oHero</object>
     <object>objects\oEnemy</object>
