@@ -45,6 +45,7 @@
   <objects name="objects">
     <object>objects\oHero</object>
     <object>objects\oEnemy</object>
+    <object>objects\oTeleEnemy</object>
     <object>objects\oTribeMan</object>
     <object>objects\oFireBro</object>
     <object>objects\oAttackParticle</object>
@@ -52,6 +53,7 @@
     <object>objects\oFireBall</object>
     <object>objects\oBoneSprite</object>
   </objects>
+  <timelines name="timelines"/>
   <rooms name="rooms">
     <room>rooms\TPROOM</room>
     <rooms name="OverWorld">
