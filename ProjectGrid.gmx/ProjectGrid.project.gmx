@@ -19,6 +19,10 @@
     <sprite>sprites\sprite10_bone_snake</sprite>
     <sprite>sprites\sSnnakeButt</sprite>
     <sprite>sprites\sDumbEyeThing</sprite>
+    <sprite>sprites\sBush</sprite>
+    <sprite>sprites\sBushOnU</sprite>
+    <sprite>sprites\s_bushjumping</sprite>
+    <sprite>sprites\sFist</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -38,10 +42,15 @@
     <script>scripts\update_key_log.gml</script>
     <script>scripts\make_collision_grid.gml</script>
     <script>scripts\change_weapon.gml</script>
+    <script>scripts\draw_text_outline.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_circle_timer.shader</shader>
+    <shader type="GLSLES">shaders\sh_bush.shader</shader>
   </shaders>
+  <fonts name="fonts">
+    <font>fonts\fDebugText</font>
+  </fonts>
   <objects name="objects">
     <object>objects\oHero</object>
     <object>objects\oEnemy</object>
@@ -52,6 +61,8 @@
     <object>objects\menu</object>
     <object>objects\oFireBall</object>
     <object>objects\oBoneSprite</object>
+    <object>objects\oBush</object>
+    <object>objects\oBushMan</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\TPROOM</room>

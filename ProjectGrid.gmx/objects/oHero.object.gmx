@@ -58,6 +58,9 @@ dest_index = 0
 //event_perform(ev_other,ev_room_start)
 alarm[11] = 1
 show_grid = false
+draw_set_font(fDebugText)
+draw_set_halign(fa_center)
+draw_set_valign(fa_center)
 </string>
           </argument>
         </arguments>
@@ -658,7 +661,7 @@ if show_grid = true
     {
         for( var xx=0;xx&lt;16;xx++)
         {
-            draw_text(xx*64+32,yy*64+32,ds_grid_get(grid_map,xx,yy))
+            draw_text_outline(xx*64+32,yy*64+32,ds_grid_get(grid_map,xx,yy),c_black,c_white)
         }
     }
 }
