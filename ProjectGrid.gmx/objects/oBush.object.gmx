@@ -50,6 +50,7 @@
             <kind>1</kind>
             <string>if alive = true
 {
+if instance_exists(oHero)
     if distance_to_point(oHero.x,oHero.y) &lt;= 65
     {
         instance_destroy()
