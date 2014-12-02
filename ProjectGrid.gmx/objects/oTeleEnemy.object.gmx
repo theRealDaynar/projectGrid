@@ -139,7 +139,7 @@ tele_x = tele_true_x
 var tele_x_previous = tele_x
 var tele_y_previous = tele_y
     var i = 0
-    while(i &lt; 4)
+    while(i &lt; 100)
     {
     randomize()
     if random(1) &gt; .8
