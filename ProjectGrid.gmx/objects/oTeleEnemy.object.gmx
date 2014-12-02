@@ -32,12 +32,11 @@ tele_speed = 0
 tele_dir = 0
 tele_x = x
 tele_y = y
-hp = 1
+hp = 2
 tele_turn_speed = turn_speed/40
 image_speed = .2
 alarm[0] = turn_speed
 alarm[1] = tele_turn_speed
-ds_grid_set(grid_map,x/64,y/64,id)
 pulse_timer = room_speed/2
 </string>
           </argument>
@@ -226,6 +225,7 @@ ds_grid_set(grid_map,x/64,y/64,id)
 alarm[0] = turn_speed
 alarm[1] = tele_turn_speed
 alarm[3] = pulse_timer
+
 </string>
           </argument>
         </arguments>
@@ -250,6 +250,52 @@ alarm[3] = pulse_timer
             <kind>1</kind>
             <string>tele_x += lengthdir_x(tele_speed,tele_dir)
 tele_y += lengthdir_y(tele_speed,tele_dir)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_perform(ev_alarm,0)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>ds_grid_set(grid_map,x/64,y/64,id)
 </string>
           </argument>
         </arguments>

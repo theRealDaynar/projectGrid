@@ -28,7 +28,7 @@
             <string>image_speed = sprite_get_number(sprite_index)/(room_speed/4)
 on_player = false
 hp = 5
-atk_speed = room_speed/4
+atk_speed = room_speed
 move_towards_point(oHero.x,oHero.y,point_distance(x,y,oHero.x,oHero.y)/atk_speed)
 fist = false
 </string>
@@ -53,9 +53,43 @@ fist = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>fist = true
+            <string>if fist =true
+oHero.hp--
+fist = true
 atk_angle = irandom(3)*90
 alarm[0]=atk_speed
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if fist = 1 and instance_exists(oAttackParticle)
+{
+     if (oAttackParticle.x &lt; oHero.x and atk_angle = 180) or (oAttackParticle.x &gt; oHero.x and atk_angle = 0) or (oAttackParticle.y &gt; oHero.y and atk_angle = 270) or (oAttackParticle.y &lt; oHero.y and atk_angle = 90)
+     {
+        fist = false
+        hp--
+        if hp &lt;= 0
+            instance_destroy()
+     }
+}
 </string>
           </argument>
         </arguments>
@@ -79,10 +113,12 @@ alarm[0]=atk_speed
           <argument>
             <kind>1</kind>
             <string>if on_player = false
+{
     on_player = true
-speed = 0
-sprite_index = sBushOnU
-alarm[0]=atk_speed
+    speed = 0
+    sprite_index = sBushOnU
+    alarm[0]=atk_speed
+}
 </string>
           </argument>
         </arguments>
@@ -141,9 +177,7 @@ alarm[0]=atk_speed
             <string>if on_player = false
     draw_sprite(sBush,image_index,x,y)
 else if fist = true
-{
-    draw_sprite_ext(sFist,0,oHero.x + 32 /*- lengthdir_x(32,atk_angle)*/ + 64*lengthdir_x(alarm[0]/atk_speed,atk_angle),oHero.y +32/*- lengthdir_y(32,atk_angle)*/ + 64*lengthdir_y(alarm[0]/atk_speed,atk_angle),1,1,atk_angle,c_white,1)
-}
+    draw_sprite_ext(sFist,0,oHero.x + 32 /*- lengthdir_x(32,atk_angle)*/ + 128*lengthdir_x(alarm[0]/atk_speed,atk_angle),oHero.y +32/*- lengthdir_y(32,atk_angle)*/ + 128*lengthdir_y(alarm[0]/atk_speed,atk_angle),1,1,atk_angle,c_white,1)
 </string>
           </argument>
         </arguments>
