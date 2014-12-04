@@ -43,7 +43,7 @@ rock_dir = 0
 rock_x = x
 rock_y = y
 rock_turn_speed = turn_speed/3
-rock_airtime = rock_turn_speed*20
+rock_airtime = rock_turn_speed*10
 boulder_angle = 0
 parried = false
 parried_speed = 10
@@ -193,10 +193,14 @@ if rock_x!=rock_x_previous or rock_y!=rock_y_previous
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if rock_thrown = false and random(1)&gt;.5
+            <string>if rock_thrown = false and ds_grid_get(grid_map,x/64,y/64) = 0 and random(1)&gt;.5
+{
 burrow = 0
-else
+}else{
+if burrow = 0
+ds_grid_set(grid_map,x/64,y/64,0)
 burrow = 1
+}
 if burrow = 1
 {
 sprite_index = sUndergroundPrarie
@@ -224,8 +228,6 @@ var i = 0
     }
     else
     {
-        ds_grid_set(grid_map,xprevious/64,yprevious/64,0)
-        ds_grid_set(grid_map,x/64,y/64,id)
         break;
     }
     i++
@@ -233,6 +235,7 @@ var i = 0
 }
 else
 {
+    ds_grid_set(grid_map,x/64,y/64,id)
     sprite_index = sPrairieDog
     alarm[1] = rock_turn_speed
     rock_thrown = true
@@ -296,6 +299,28 @@ alarm[4] = point_distance(rock_true_x,rock_true_y,x,y)/parried_speed
 rock_speed = parried_speed
 rock_dir = point_direction(rock_true_x,rock_true_y,x,y)
 </string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>do nothing</string>
           </argument>
         </arguments>
       </action>

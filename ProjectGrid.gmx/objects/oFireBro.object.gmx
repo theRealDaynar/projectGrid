@@ -193,9 +193,12 @@ switch(ramming)
 }
 if ds_grid_get(grid_map,x/64,y/64) != 0 or x &lt; 0 or y &lt; 0 or x &gt;= 64*16 or y &gt;= 64*10 
 {   
+    var splode = 1
     if ds_grid_get(grid_map,x/64,y/64).object_index = oHero
     {
-        oHero.hp--
+        splode = damage_player()
+        y = yprevious
+        x = xprevious
     }else
     {
     y = yprevious
@@ -238,8 +241,8 @@ if ds_grid_get(grid_map,x/64,y/64) != 0 or x &lt; 0 or y &lt; 0 or x &gt;= 64*16
         inst.image_angle = 315
     }
     }
-    
-    instance_destroy()
+    if splode = 1
+        instance_destroy()
 }
 else
 {
@@ -266,6 +269,42 @@ if x!=xprevious or y!=yprevious
     x = xprevious
 }
 if (ramming=false) {image_index=0} else {image_index=1}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>switch(ramming)
+{
+    case 1:
+        ramming = 3;
+    break;
+    case 3:
+        ramming = 1;
+    break;
+    case 2:
+        ramming = 4;
+    break;
+    case 4:
+        ramming = 2;
+}
 </string>
           </argument>
         </arguments>
