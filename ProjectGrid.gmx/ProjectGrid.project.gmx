@@ -26,6 +26,8 @@
     <sprite>sprites\sPrairieDog</sprite>
     <sprite>sprites\sRock</sprite>
     <sprite>sprites\sUndergroundPrarie</sprite>
+    <sprite>sprites\sAcidBall</sprite>
+    <sprite>sprites\sAcid</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -67,6 +69,8 @@
     <object>objects\oBush</object>
     <object>objects\oBushMan</object>
     <object>objects\oPrieDawgo</object>
+    <object>objects\oAcidBall</object>
+    <object>objects\oAcid</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\TPROOM</room>

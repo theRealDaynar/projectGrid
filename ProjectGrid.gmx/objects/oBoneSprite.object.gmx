@@ -96,7 +96,7 @@ ds_grid_set(grid_map,section_xy[1,2]/64,section_xy[1,3]/64,0)
             <string>speed = 0
 alarm[0] = turn_speed
 
-with(instance_create(true_x + lengthdir_x(64,direction),true_y + lengthdir_y(64,direction),oFireBall))
+with(instance_create(true_x + lengthdir_x(64,direction),true_y + lengthdir_y(64,direction),oAcidBall))
 {
     direction = other.direction
     image_angle = direction
