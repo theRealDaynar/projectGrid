@@ -48,10 +48,11 @@
     <script>scripts\make_collision_grid.gml</script>
     <script>scripts\change_weapon.gml</script>
     <script>scripts\draw_text_outline.gml</script>
+    <script>scripts\damage_player.gml</script>
   </scripts>
   <shaders name="shaders">
-    <shader type="GLSLES">shaders\shader_circle_timer.shader</shader>
     <shader type="GLSLES">shaders\sh_bush.shader</shader>
+    <shader type="GLSLES">shaders\sh_temp.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\fDebugText</font>

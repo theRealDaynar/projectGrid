@@ -56,9 +56,34 @@ alarm[0] = turn_speed
 if ds_grid_get(grid_map,round(x+sign(hspeed)*64)/64,round(y+sign(vspeed)*64)/64) != 0
 {
     if ds_grid_get(grid_map,round(x+sign(hspeed)*64)/64,round(y+sign(vspeed)*64)/64).object_index = oHero
-         oHero.hp --
-    instance_destroy()
+         if damage_player() = 1
+            instance_destroy()
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///parried
+image_angle += 180
+direction = image_angle
 </string>
           </argument>
         </arguments>

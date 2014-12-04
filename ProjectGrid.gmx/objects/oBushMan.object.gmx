@@ -144,11 +144,14 @@ alarm[0]=atk_speed
             <string>if on_player = true
 {
     //draw_thingy
-     var fog = shader_get_uniform(sh_bush,"u_vFogOfWar")
+    if shader_is_compiled(sh_bush)
+    {
+        var fog = shader_get_uniform(sh_bush,"u_vFogOfWar")
             var res = shader_get_uniform(sh_bush,"u_vResolution")
             shader_set(sh_bush)
             shader_set_uniform_f(fog,(oHero.x+32)*2-64*16,-(oHero.y+32)*2+64*12,64*2,64*2)
             shader_set_uniform_f(res,window_get_width(),window_get_height())
+    }
             draw_sprite(sprite_index,image_index,0,0)
     shader_reset()
 }
