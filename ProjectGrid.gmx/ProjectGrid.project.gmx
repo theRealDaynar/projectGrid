@@ -23,6 +23,9 @@
     <sprite>sprites\sBushOnU</sprite>
     <sprite>sprites\s_bushjumping</sprite>
     <sprite>sprites\sFist</sprite>
+    <sprite>sprites\sPrairieDog</sprite>
+    <sprite>sprites\sRock</sprite>
+    <sprite>sprites\sUndergroundPrarie</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -63,6 +66,7 @@
     <object>objects\oBoneSprite</object>
     <object>objects\oBush</object>
     <object>objects\oBushMan</object>
+    <object>objects\oPrieDawgo</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\TPROOM</room>
