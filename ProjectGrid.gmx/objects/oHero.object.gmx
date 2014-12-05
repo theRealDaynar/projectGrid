@@ -48,6 +48,7 @@ mini_map = surface_create(5*8*4,6*5*4)
 hp = 4
 weapon_array = change_weapon(1)
 s1 = surface_create(64,64)
+last_room = room
 for(var i=0;i&lt;4;i++)
 {
 room_history[i,0] = -1
@@ -63,6 +64,7 @@ parry_frames = room_speed
 draw_set_font(fDebugText)
 draw_set_halign(fa_center)
 draw_set_valign(fa_center)
+dest_room = room
 </string>
           </argument>
         </arguments>
@@ -300,12 +302,33 @@ randomize()
             <kind>1</kind>
             <string>
 for(var i = 1;i&lt;4;i++)
-if mouse_check_button_pressed(mb_left) and mouse_x &gt; (room_history[i,0]-r1A )%5*8*4 + room_width - surface_get_width(mini_map) and mouse_y &gt; room_height - surface_get_height(mini_map) + floor((room_history[i,0]-r1A)/5)*5*4 and mouse_x &lt; 4*((room_history[i,0]-r1A)%5*8+8) + room_width - surface_get_width(mini_map) and mouse_y &lt; room_height - surface_get_height(mini_map) + 4*(floor((room_history[i,0] - r1A)/5)*5+5)
+if mouse_x &gt; (room_history[i,0]-r1A )%5*8*4 + room_width - surface_get_width(mini_map) and mouse_y &gt; room_height - surface_get_height(mini_map) + floor((room_history[i,0]-r1A)/5)*5*4 and mouse_x &lt; 4*((room_history[i,0]-r1A)%5*8+8) + room_width - surface_get_width(mini_map) and mouse_y &lt; room_height - surface_get_height(mini_map) + 4*(floor((room_history[i,0] - r1A)/5)*5+5) and room_history[i,0] != room
 {
-room_start = -1
-dest_index = i
-room_goto(room_history[i,0])
-dd=true
+    if mouse_check_button_pressed(mb_left)
+    {
+        room_start = -1
+        dest_index = i
+        room_goto(room_history[i,0])
+        dd=true
+        dest_room = room_history[i,0]
+    }
+    else if mouse_check_button_pressed(mb_right)
+    {
+        room_history[i,0] = -1
+        if !surface_exists(mini_map)
+            mini_map = surface_create(5*8*4,6*5*4)
+        surface_set_target(mini_map)
+        draw_clear(c_gray)
+        for(var i = 1;i&lt;4;i++)
+            draw_rectangle_colour((room_history[i,0]-r1A )%5*8*4,floor((room_history[i,0]-r1A)/5)*5*4,4*((room_history[i,0]-r1A)%5*8+8),4*(floor((room_history[i,0] - r1A)/5)*5+5),c_green,c_green,c_green,c_green,false)
+        draw_rectangle_colour((room-r1A )%5*8*4,floor((room-r1A)/5)*5*4,4*((room-r1A)%5*8+8),4*(floor((room - r1A)/5)*5+5),c_yellow,c_yellow,c_yellow,c_yellow,false)
+        draw_set_colour(c_black)
+        for(var i = 8;i&lt;=5*8;i+=8)
+            draw_line(i*4,0,i*4,6*5*4)
+        for(var i = 5;i&lt;=6*5;i+=5)
+            draw_line(0,i*4,5*8*4,i*4)
+        surface_reset_target()
+    }
 }
 
 if move_cooldown = false and ds_list_size(key_log) &gt; 0 and room_start &lt;= 0 and dd = false
@@ -520,10 +543,13 @@ for(var i=0;i&lt;4;i++)
     temp_array[i,1] = room_history[i,1]
     temp_array[i,2] = room_history[i,2]
 }
+var ii = -1
 for(var i=1;i&lt;4;i++)
 {
-    room_history[i,1] = temp_array[i-1,1]
-    room_history[i,2] = temp_array[i-1,2]
+    if room_history[i,0] = dest_room
+        ii=0
+    room_history[i,1] = temp_array[i+ii,1]
+    room_history[i,2] = temp_array[i+ii,2]
 }
 room_history[0,1] = xprevious
 room_history[0,2] = yprevious
@@ -550,22 +576,26 @@ room_history[0,2] = yprevious
           <argument>
             <kind>1</kind>
             <string>if room_start = 0
-room_start=1
+    room_start=1
 else
-room_start = 0
+    room_start = 0
 for(var i=0;i&lt;4;i++)
+{
     if room_history[i,0] = room
         with(oEnemy)
-            instance_destroy()
-
+            instance_destroy()  
+}
 var temp_array;
 for(var i=0;i&lt;4;i++)
 {
     temp_array[i,0] = room_history[i,0]
 }
+var ii = -1
 for(var i=1;i&lt;4;i++)
 {
-    room_history[i,0] = temp_array[i-1,0]
+    if temp_array[i-1,0] = room
+        ii=0
+    room_history[i,0] = temp_array[i+ii,0]
 }
 room_history[0,0] = room
 if !surface_exists(mini_map)
@@ -581,6 +611,7 @@ draw_line(i*4,0,i*4,6*5*4)
 for(var i = 5;i&lt;=6*5;i+=5)
 draw_line(0,i*4,5*8*4,i*4)
 surface_reset_target()
+last_room = room
 </string>
           </argument>
         </arguments>
@@ -609,16 +640,20 @@ switch(trans_dir)
     {
     case 0:
 room_goto(room - 1)
+dest_room = room - 1
     break;
     case 1:
 room_goto(room - 5)
-    break;
+dest_room = room - 5
+        break;
     case 2:
 room_goto(room + 1)
-    break
+dest_room = room + 1
+        break
     case 3:
 room_goto(room + 5)
-    }
+dest_room = room + 5
+        }
 }
 </string>
           </argument>
@@ -642,7 +677,9 @@ room_goto(room + 5)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if room_start &gt; 0
+            <string>
+
+if room_start &gt; 0
 {
     if room_start = 1
     {
