@@ -372,7 +372,8 @@ if parried =true
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self()
+            <string>if ds_grid_get(grid_map,x/64,y/64) != -1
+    draw_self()
 if rock_thrown = true
 {
     draw_sprite_ext(sRock,0, 32+rock_x, 32+rock_y, 1, 1, boulder_angle, c_black,.5 * (rock_airtime-alarm[3])/rock_airtime + .3)

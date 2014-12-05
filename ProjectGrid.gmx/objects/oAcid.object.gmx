@@ -27,9 +27,34 @@
             <kind>1</kind>
             <string>x = round(x/64)*64
 y = round(y/64)*64
-alarm[0] = 215
-alarm[1] = 225
-alarm[2] = 295
+alarm[0] = room_speed * 3.6
+alarm[1] = room_speed * 3.75
+alarm[2] = room_speed * 4.91
+attack_speed = room_speed
+attack_cd = false
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>attack_cd = false
 </string>
           </argument>
         </arguments>
@@ -103,6 +128,34 @@ alarm[2] = 295
           <argument>
             <kind>0</kind>
             <string>1</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if oHero.x = x and oHero.y = y and attack_cd = false
+{
+    damage_player()
+    alarm[3] = attack_speed
+    attack_cd = true
+}
+</string>
           </argument>
         </arguments>
       </action>

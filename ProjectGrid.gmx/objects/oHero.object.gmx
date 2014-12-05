@@ -713,6 +713,7 @@ if show_grid = true
             draw_text_outline(xx*64+32,yy*64+32,ds_grid_get(grid_map,xx,yy),c_black,c_white)
         }
     }
+    draw_text_outline(100,700,"HP: " + string(hp),c_black,c_white)
 }
 </string>
           </argument>
