@@ -28,6 +28,7 @@
     <sprite>sprites\sUndergroundPrarie</sprite>
     <sprite>sprites\sAcidBall</sprite>
     <sprite>sprites\sAcid</sprite>
+    <sprite>sprites\sChest</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -72,6 +73,8 @@
     <object>objects\oPrieDawgo</object>
     <object>objects\oAcidBall</object>
     <object>objects\oAcid</object>
+    <object>objects\oChest</object>
+    <object>objects\oHoverText</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\TPROOM</room>

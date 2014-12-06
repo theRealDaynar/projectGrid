@@ -747,10 +747,10 @@ if show_grid = true
     {
         for( var xx=0;xx&lt;16;xx++)
         {
-            draw_text_outline(xx*64+32,yy*64+32,ds_grid_get(grid_map,xx,yy),c_black,c_white)
+            draw_text_outline(xx*64+32,yy*64+32,ds_grid_get(grid_map,xx,yy),c_black,c_white,1)
         }
     }
-    draw_text_outline(100,700,"HP: " + string(hp),c_black,c_white)
+    draw_text_outline(100,700,"HP: " + string(hp),c_black,c_white,1)
 }
 </string>
           </argument>
@@ -820,14 +820,23 @@ if show_grid = true
         if ds_grid_get(grid_map,(x-64*weapon_array[i])/64,y/64) != -1
             draw_surface(s1,x-64*weapon_array[i],y)
     draw_set_alpha(1)
+    var no_shader = false
     if parry = true
     {
-        var p = shader_get_uniform(sh_temp,"u_fParryTime")
-        shader_set(sh_temp)
-        shader_set_uniform_f(p, alarm[3])
+        if shader_is_compiled(sh_temp)
+        {
+            var p = shader_get_uniform(sh_temp,"u_fParryTime")
+            shader_set(sh_temp)
+            shader_set_uniform_f(p, alarm[3])
+        }
+        else
+        no_shader = true
     }
     draw_self()
-    shader_reset()
+    if no_shader = false
+        shader_reset()
+    else
+        draw_sprite_ext(sprite_index,image_index,x,y,1,1,0,c_black,.4)
 }
 </string>
           </argument>
