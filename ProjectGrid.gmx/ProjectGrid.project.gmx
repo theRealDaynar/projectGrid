@@ -29,6 +29,7 @@
     <sprite>sprites\sAcidBall</sprite>
     <sprite>sprites\sAcid</sprite>
     <sprite>sprites\sChest</sprite>
+    <sprite>sprites\sKnife</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -50,6 +51,7 @@
     <script>scripts\change_weapon.gml</script>
     <script>scripts\draw_text_outline.gml</script>
     <script>scripts\damage_player.gml</script>
+    <script>scripts\item_info.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\sh_bush.shader</shader>

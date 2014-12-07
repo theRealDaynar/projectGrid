@@ -73,10 +73,13 @@ ds_grid_add(grid_map,x/64,y/64,id)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if oHero.x = x and oHero.y = y+64
+            <string>///open chest
+if oHero.x = x and oHero.y = y+64
 {
     image_index = 1
-    (instance_create(x+32,y,oHoverText)).text = "This is test, you opened a chest."
+    var i = item_info(item)
+    (instance_create(x+32,y,oHoverText)).text = "You have found a " + i[0]
+    oHero.inv[item] = true
     item = 0
 }
 </string>

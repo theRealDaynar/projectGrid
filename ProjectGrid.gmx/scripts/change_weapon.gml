@@ -1,3 +1,4 @@
+///change_weapon(weapon number)
 var wep_array
 switch(argument0)
 {

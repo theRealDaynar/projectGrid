@@ -26,16 +26,12 @@
           <argument>
             <kind>1</kind>
             <string>turn_speed = room_speed/2.5
-atk_speed = room_speed/2
+atk_speed = room_speed*500
 atk_cooldown = false
 move_cooldown = false
 key_log = ds_list_create()
 atk_key_log = ds_list_create()
 image_speed = .25
-top_room = room
-right_room = room
-bottom_room = room
-left_room = room
 trans_dir = 0
 globalvar old_room_surface;
 old_room_surface = 10000
@@ -46,7 +42,8 @@ room_trans = room_speed
 dd = false
 mini_map = surface_create(5*8*4,6*5*4)
 hp = 4
-weapon_array = change_weapon(1)
+weapon = 1
+weapon_array = change_weapon(weapon)
 s1 = surface_create(64,64)
 last_room = room
 for(var i=0;i&lt;4;i++)
@@ -65,6 +62,11 @@ draw_set_font(fDebugText)
 draw_set_halign(fa_center)
 draw_set_valign(fa_center)
 dest_room = room
+for(var i = 1; i &lt; 3; i++)
+{
+    inv[i] = false  
+}
+inv[0] = true
 </string>
           </argument>
         </arguments>
@@ -433,7 +435,11 @@ if atk_cooldown = false and ds_list_size(atk_key_log) &gt; 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>weapon_array = change_weapon(3)
+            <string>if inv[2] = true
+{
+    weapon = 3
+    weapon_array = change_weapon(weapon)
+}
 </string>
           </argument>
         </arguments>
@@ -456,7 +462,11 @@ if atk_cooldown = false and ds_list_size(atk_key_log) &gt; 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>weapon_array = change_weapon(2)
+            <string>if inv[1] = true
+{
+    weapon = 2
+    weapon_array = change_weapon(weapon)
+}
 </string>
           </argument>
         </arguments>
@@ -479,7 +489,11 @@ if atk_cooldown = false and ds_list_size(atk_key_log) &gt; 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>weapon_array = change_weapon(1)
+            <string>if inv[0] = true
+{
+    weapon = 1
+    weapon_array = change_weapon(weapon)
+}
 </string>
           </argument>
         </arguments>
@@ -736,10 +750,11 @@ if surface_exists(mini_map)
     
 for(var i = 0; i &lt; hp; i++)
 {
-    draw_sprite(sprite9_bestsprite,0,70+i*70, room_height - 100)
+    draw_sprite(sprite9_bestsprite,0,70+i*70, room_height - 90)
 }
-
-
+var itm = item_info(weapon - 1)
+draw_sprite(itm[1],0,room_width - 300,room_height - 80)
+draw_text_outline(room_width - 268,room_height - 90,itm[0],c_dkgray,c_white,1)
 //grid debug
 if show_grid = true
 {
@@ -780,31 +795,94 @@ if show_grid = true
         s1 = surface_create(64,64)
     surface_set_target(s1)
     draw_clear_alpha(c_white,0)
+    invt = item_info(weapon-1)
     if atk_cooldown =true
     {
         //this code draws the sprite at the current x and y position of the instance
         
-        var i, steps, xx, yy, u, v, radius, amount, tex;
-        tex = sprite_get_texture(sAttackPossibility,0)
-        radius = 64
+        var i, steps, xx, yy, u, v, radius, amount, tex, ang;
+        tex = sprite_get_texture(invt[1],0)
+        radius = 32
         amount = (alarm[1]-atk_speed)/atk_speed*360
         steps = 20; 
         
         draw_set_color(c_white);
         draw_primitive_begin_texture(pr_trianglefan,tex);
-        draw_vertex_texture(radius/2,radius/2,0.5,0.5);
-        for(i = 0; i &lt;= steps; i += 1)
+        draw_vertex_texture(radius,radius,0.5,0.5);
+        for(i = 0; i &lt;= steps; i ++)
         {
-          xx = radius + lengthdir_x(radius, 90+ amount * i / steps);
-          yy = radius + lengthdir_y(radius, 90+ amount * i / steps);  
-          u = xx/(radius*2);
-          v = yy/(radius*2);
-          draw_vertex_texture(xx-radius/2,yy-radius/2,u,v);
+            ang = amount*i/steps
+            /*if ang &gt;= 0 and ang &lt;= 90
+            {
+                yy = 32*tan(degtorad(ang))//radius + lengthdir_x(radius, 90+ amount * i / steps);
+                xx = 0
+            }
+            else if ang &gt;= 180 or ang &lt;= 270
+            {
+                yy = 32 *tan(degtorad(ang))//radius + lengthdir_x(radius, 90+ amount * i / steps);
+                xx = 64
+            }
+            else
+            {
+                xx = 32 *tan(degtorad(ang))//radius + lengthdir_y(radius, 90+ amount * i / steps);
+                if ang &gt; 90 and ang &lt; 180
+                    yy = 64
+                else
+                    yy = 0
+            }*/
+            /*if ang &lt;= 0 and ang &gt;= -45
+            {
+                yy = radius + 32*tan(-degtorad(ang));
+                xx = 64
+            }
+            else if ang &lt; -45 and ang &gt;= -90
+            {
+                yy = 64
+                xx = radius + 32*tan(-degtorad(-ang));
+            }
+            else if ang &lt; -90 and ang &gt;= -135
+            {
+                yy = 64
+                xx = lengthdir_x(radius, ang);
+            }
+            else if ang &lt; -135 and ang &gt;= -180
+            {
+                yy = 32 + lengthdir_y(radius, ang);
+                xx = 0
+            }
+            else if ang &lt; -180 and ang &gt;= -225
+            {
+                yy = lengthdir_y(radius, ang);
+                xx = 0
+            }
+            else if ang &lt; -225 and ang &gt;= -270
+            {
+                yy = 0
+                xx = lengthdir_x(radius, ang);
+            }
+            else if ang &lt; -270 and ang &gt;= -315
+            {
+                yy = 0
+                xx = 32 + lengthdir_x(radius, ang);
+            }
+            else if ang &lt; - 315
+            {
+                yy = lengthdir_y(radius, ang);
+                xx = 64
+            }
+            else
+            {*/
+                xx = radius + lengthdir_x(radius, amount * i / steps);//32 *tan(degtorad(ang+90))
+                yy = radius + lengthdir_y(radius, amount * i / steps);
+            //}
+            u = xx/(radius*2);
+            v = yy/(radius*2);
+          draw_vertex_texture(xx,yy,u,v);
         }
         draw_primitive_end();
     }
     else
-        draw_sprite(sAttackPossibility,0,0,0)
+        draw_sprite(invt[1],0,0,0)
     surface_reset_target()
     draw_set_alpha(.2)
     for(var i = 1; i&lt;=weapon_array[0];i++)
