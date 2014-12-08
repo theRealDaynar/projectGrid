@@ -830,22 +830,27 @@ if show_grid = true
                 else
                     yy = 0
             }*/
-            /*if ang &lt;= 0 and ang &gt;= -45
+            if ang &lt;= 0 and ang &gt; -90
             {
-                yy = radius + 32*tan(-degtorad(ang));
+                yy = radius - 32*tan(degtorad(ang));
                 xx = 64
             }
-            else if ang &lt; -45 and ang &gt;= -90
+            else if ang &lt;= -90 and ang &gt; -180
             {
+                xx = radius + 32*tan(degtorad(ang+90));
                 yy = 64
-                xx = radius + 32*tan(-degtorad(-ang));
             }
-            else if ang &lt; -90 and ang &gt;= -135
+            else if ang &lt;= -180 and ang &gt; -270
             {
-                yy = 64
-                xx = lengthdir_x(radius, ang);
+                xx = 0
+                    yy = radius + 32*tan(degtorad(ang+180));
             }
-            else if ang &lt; -135 and ang &gt;= -180
+            else if ang &lt;= -270 and ang &gt; -360
+            {
+                xx = radius - 32*tan(degtorad(ang+270));
+                yy = 0
+            }
+            /*else if ang &lt; -135 and ang &gt;= -180
             {
                 yy = 32 + lengthdir_y(radius, ang);
                 xx = 0
@@ -869,12 +874,12 @@ if show_grid = true
             {
                 yy = lengthdir_y(radius, ang);
                 xx = 64
-            }
+            }*/
             else
-            {*/
+            {
                 xx = radius + lengthdir_x(radius, amount * i / steps);//32 *tan(degtorad(ang+90))
                 yy = radius + lengthdir_y(radius, amount * i / steps);
-            //}
+            }
             u = xx/(radius*2);
             v = yy/(radius*2);
           draw_vertex_texture(xx,yy,u,v);
@@ -884,7 +889,7 @@ if show_grid = true
     else
         draw_sprite(invt[1],0,0,0)
     surface_reset_target()
-    draw_set_alpha(.2)
+    draw_set_alpha(.4)
     for(var i = 1; i&lt;=weapon_array[0];i++)
         if ds_grid_get(grid_map,x/64,(y+64*weapon_array[i])/64) != -1
             draw_surface(s1,x,y+64*weapon_array[i])
