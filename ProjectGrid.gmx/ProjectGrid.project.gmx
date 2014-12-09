@@ -44,6 +44,10 @@
     <background>background\dungeon6</background>
     <background>background\plateauBG</background>
     <background>background\bluethorn</background>
+    <background>background\fort1</background>
+    <background>background\fort2</background>
+    <background>background\fort3</background>
+    <background>background\fort4</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -89,31 +93,43 @@
       <room>rooms\r1C</room>
       <room>rooms\r1D</room>
       <room>rooms\r1E</room>
+      <room>rooms\r1F</room>
+      <room>rooms\r1G</room>
       <room>rooms\r2A</room>
       <room>rooms\r2B</room>
       <room>rooms\r2C</room>
       <room>rooms\r2D</room>
       <room>rooms\r2E</room>
+      <room>rooms\r2F</room>
+      <room>rooms\r2G</room>
       <room>rooms\r3A</room>
       <room>rooms\r3B</room>
       <room>rooms\r3C</room>
       <room>rooms\r3D</room>
       <room>rooms\r3E</room>
+      <room>rooms\r3F</room>
+      <room>rooms\r3G</room>
       <room>rooms\r4A</room>
       <room>rooms\r4B</room>
       <room>rooms\r4C</room>
       <room>rooms\r4D</room>
       <room>rooms\r4E</room>
+      <room>rooms\r4F</room>
+      <room>rooms\r4G</room>
       <room>rooms\r5A</room>
       <room>rooms\r5B</room>
       <room>rooms\r5C</room>
       <room>rooms\r5D</room>
       <room>rooms\r5E</room>
+      <room>rooms\r5F</room>
+      <room>rooms\r5G</room>
       <room>rooms\r6A</room>
       <room>rooms\r6B</room>
       <room>rooms\r6C</room>
       <room>rooms\r6D</room>
       <room>rooms\r6E</room>
+      <room>rooms\r6F</room>
+      <room>rooms\r6G</room>
     </rooms>
     <room>rooms\r_0_0</room>
     <room>rooms\r_0_1</room>

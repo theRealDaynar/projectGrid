@@ -657,16 +657,16 @@ room_goto(room - 1)
 dest_room = room - 1
     break;
     case 1:
-room_goto(room - 5)
-dest_room = room - 5
+room_goto(room - 7)
+dest_room = room - 7
         break;
     case 2:
 room_goto(room + 1)
 dest_room = room + 1
         break
     case 3:
-room_goto(room + 5)
-dest_room = room + 5
+room_goto(room + 7)
+dest_room = room + 7
         }
 }
 </string>
