@@ -8,6 +8,7 @@
   <sprites name="sprites">
     <sprite>sprites\yoImmaPlayaDawg</sprite>
     <sprite>sprites\sprite1_man</sprite>
+    <sprite>sprites\sNPC</sprite>
     <sprite>sprites\sFireBro</sprite>
     <sprite>sprites\sAttack</sprite>
     <sprite>sprites\sAttackPossibility</sprite>
@@ -77,6 +78,7 @@
     <object>objects\oAcid</object>
     <object>objects\oChest</object>
     <object>objects\oHoverText</object>
+    <object>objects\oNPC</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\TPROOM</room>
