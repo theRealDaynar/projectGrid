@@ -811,7 +811,7 @@ if show_grid = true
         draw_vertex_texture(radius,radius,0.5,0.5);
         for(i = 0; i &lt;= steps; i ++)
         {
-            ang = amount*i/steps
+            ang = amount*i/steps + 90
             /*if ang &gt;= 0 and ang &lt;= 90
             {
                 yy = 32*tan(degtorad(ang))//radius + lengthdir_x(radius, 90+ amount * i / steps);
@@ -845,7 +845,7 @@ if show_grid = true
                 xx = 0
                     yy = radius + 32*tan(degtorad(ang+180));
             }
-            else if ang &lt;= -270 and ang &gt; -360
+            else if ang &lt;= -270 and ang &gt; -360 or ang &lt;= 90 and ang &gt;0
             {
                 xx = radius - 32*tan(degtorad(ang+270));
                 yy = 0

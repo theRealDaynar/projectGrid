@@ -60,6 +60,7 @@
   </shaders>
   <fonts name="fonts">
     <font>fonts\fDebugText</font>
+    <font>fonts\fNPC</font>
   </fonts>
   <objects name="objects">
     <object>objects\oHero</object>

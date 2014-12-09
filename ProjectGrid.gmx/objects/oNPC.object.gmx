@@ -35,6 +35,30 @@ display_text = ""
 type_speed = room_speed/60
 true_text_y = 0
 text_y = 0
+text_surf = surface_create(room_width - 160,room_height - 650)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>surface_free(text_surf)
 </string>
           </argument>
         </arguments>
@@ -61,8 +85,18 @@ text_y = 0
 {
     display_text = display_text + string_char_at(text,string_length(display_text)+1)
     alarm[0] = type_speed
-    if string_height_ext(display_text + "_",15,room_width - 170) &gt; room_height - 650 - text_y
-        true_text_y -= string_height("A")
+    if string_height_ext(display_text + "_",25,room_width - 170) &gt; room_height - 650 - true_text_y
+        true_text_y -= 25
+     var underscore = "_"
+    if alarm[0] &lt;= 0 or alarm[0] &gt;= type_speed - 1
+        underscore = ""
+    if !surface_exists(text_surf)
+        text_surf = surface_create(room_width - 160,room_height - 650)
+    surface_set_target(text_surf)
+    draw_clear(c_white)
+    draw_set_font(fNPC)
+    draw_text_ext_colour(0,text_y,display_text,25,room_width - 170,c_black,c_black,c_black,c_black,1)
+    surface_reset_target()
 }
 </string>
           </argument>
@@ -97,11 +131,19 @@ else if draw = true and point_distance(x,y,oHero.x,oHero.y) &gt; 64
     draw = false
     display_text = ""
     true_text_y = 0
+    alarm[0] = 0
 }
 
 if true_text_y &lt; text_y
 {
     text_y --
+    if !surface_exists(text_surf)
+        text_surf = surface_create(room_width - 160,room_height - 650)
+    surface_set_target(text_surf)
+    draw_clear(c_white)
+    draw_set_font(fNPC)
+    draw_text_ext_colour(0, text_y,display_text,25,room_width - 170,c_black,c_black,c_black,c_black,1)
+    surface_reset_target()
 }
 else
 {
@@ -138,10 +180,7 @@ if draw = true
     draw_sprite(sprite_index,image_index,10 + 148/2 - 32,650 + 32)
     draw_set_halign(fa_left)
     draw_set_valign(fa_top)
-    var underscore = "_"
-    if alarm[0] &lt;= 0 or alarm[0] &gt;= type_speed - 1
-        underscore = ""
-    draw_text_ext_colour(160,650 + text_y,display_text + underscore,15,room_width - 170,c_black,c_black,c_black,c_black,1)
+    draw_surface(text_surf,160,650)
 }
 </string>
           </argument>
