@@ -40,7 +40,7 @@ new_room_surface = 10000
 room_start = -1
 room_trans = room_speed
 dd = false
-mini_map = surface_create(5*8*4,6*5*4)
+mini_map = surface_create(7*8*4,6*5*4)
 hp = 4
 weapon = 1
 weapon_array = change_weapon(weapon)
@@ -90,17 +90,17 @@ inv[0] = true
           <argument>
             <kind>1</kind>
             <string>if !surface_exists(mini_map)
-    mini_map = surface_create(5*8*4,6*5*4)
+    mini_map = surface_create(7*8*4,6*5*4)
 surface_set_target(mini_map)
 draw_clear(c_gray)
 for(var i = 1;i&lt;4;i++)
-draw_rectangle_colour((room_history[i,0]-r1A )%5*8*4,floor((room_history[i,0]-r1A)/5)*5*4,4*((room_history[i,0]-r1A)%5*8+8),4*(floor((room_history[i,0] - r1A)/5)*5+5),c_green,c_green,c_green,c_green,false)
-draw_rectangle_colour((room-r1A )%5*8*4,floor((room-r1A)/5)*5*4,4*((room-r1A)%5*8+8),4*(floor((room - r1A)/5)*5+5),c_yellow,c_yellow,c_yellow,c_yellow,false)
+draw_rectangle_colour((room_history[i,0]-r1A )%7*8*4,floor((room_history[i,0]-r1A)/7)*5*4,4*((room_history[i,0]-r1A)%7*8+8),4*(floor((room_history[i,0] - r1A)/7)*5+5),c_green,c_green,c_green,c_green,false)
+draw_rectangle_colour((room-r1A )%7*8*4,floor((room-r1A)/7)*5*4,4*((room-r1A)%7*8+8),4*(floor((room - r1A)/7)*5+5),c_yellow,c_yellow,c_yellow,c_yellow,false)
 draw_set_colour(c_black)
-for(var i = 8;i&lt;=5*8;i+=8)
+for(var i = 8;i&lt;=7*8;i+=8)
 draw_line(i*4,0,i*4,6*5*4)
 for(var i = 5;i&lt;=6*5;i+=5)
-draw_line(0,i*4,5*8*4,i*4)
+draw_line(0,i*4,7*8*4,i*4)
 surface_reset_target()
 </string>
           </argument>
@@ -304,7 +304,7 @@ randomize()
             <kind>1</kind>
             <string>
 for(var i = 1;i&lt;4;i++)
-if mouse_x &gt; (room_history[i,0]-r1A )%5*8*4 + room_width - surface_get_width(mini_map) and mouse_y &gt; room_height - surface_get_height(mini_map) + floor((room_history[i,0]-r1A)/5)*5*4 and mouse_x &lt; 4*((room_history[i,0]-r1A)%5*8+8) + room_width - surface_get_width(mini_map) and mouse_y &lt; room_height - surface_get_height(mini_map) + 4*(floor((room_history[i,0] - r1A)/5)*5+5) and room_history[i,0] != room
+if mouse_x &gt; (room_history[i,0]-r1A )%7*8*4 + room_width - surface_get_width(mini_map) and mouse_y &gt; room_height - surface_get_height(mini_map) + floor((room_history[i,0]-r1A)/5)*5*4 and mouse_x &lt; 4*((room_history[i,0]-r1A)%7*8+8) + room_width - surface_get_width(mini_map) and mouse_y &lt; room_height - surface_get_height(mini_map) + 4*(floor((room_history[i,0] - r1A)/5)*5+5) and room_history[i,0] != room
 {
     if mouse_check_button_pressed(mb_left)
     {
@@ -318,17 +318,17 @@ if mouse_x &gt; (room_history[i,0]-r1A )%5*8*4 + room_width - surface_get_width(
     {
         room_history[i,0] = -1
         if !surface_exists(mini_map)
-            mini_map = surface_create(5*8*4,6*5*4)
+            mini_map = surface_create(7*8*4,6*5*4)
         surface_set_target(mini_map)
         draw_clear(c_gray)
         for(var i = 1;i&lt;4;i++)
-            draw_rectangle_colour((room_history[i,0]-r1A )%5*8*4,floor((room_history[i,0]-r1A)/5)*5*4,4*((room_history[i,0]-r1A)%5*8+8),4*(floor((room_history[i,0] - r1A)/5)*5+5),c_green,c_green,c_green,c_green,false)
-        draw_rectangle_colour((room-r1A )%5*8*4,floor((room-r1A)/5)*5*4,4*((room-r1A)%5*8+8),4*(floor((room - r1A)/5)*5+5),c_yellow,c_yellow,c_yellow,c_yellow,false)
+        draw_rectangle_colour((room_history[i,0]-r1A )%7*8*4,floor((room_history[i,0]-r1A)/5)*5*4,4*((room_history[i,0]-r1A)%7*8+8),4*(floor((room_history[i,0] - r1A)/5)*5+5),c_green,c_green,c_green,c_green,false)
+        draw_rectangle_colour((room-r1A )%7*8*4,floor((room-r1A)/5)*5*4,4*((room-r1A)%7*8+8),4*(floor((room - r1A)/5)*5+5),c_yellow,c_yellow,c_yellow,c_yellow,false)
         draw_set_colour(c_black)
-        for(var i = 8;i&lt;=5*8;i+=8)
-            draw_line(i*4,0,i*4,6*5*4)
+        for(var i = 8;i&lt;=7*8;i+=8)
+        draw_line(i*4,0,i*4,6*5*4)
         for(var i = 5;i&lt;=6*5;i+=5)
-            draw_line(0,i*4,5*8*4,i*4)
+        draw_line(0,i*4,7*8*4,i*4)
         surface_reset_target()
     }
 }
@@ -613,17 +613,17 @@ for(var i=1;i&lt;4;i++)
 }
 room_history[0,0] = room
 if !surface_exists(mini_map)
-    mini_map = surface_create(5*8*4,6*5*4)
+    mini_map = surface_create(7*8*4,6*5*4)
 surface_set_target(mini_map)
 draw_clear(c_gray)
 for(var i = 1;i&lt;4;i++)
-draw_rectangle_colour((room_history[i,0]-r1A )%5*8*4,floor((room_history[i,0]-r1A)/5)*5*4,4*((room_history[i,0]-r1A)%5*8+8),4*(floor((room_history[i,0] - r1A)/5)*5+5),c_green,c_green,c_green,c_green,false)
-draw_rectangle_colour((room-r1A )%5*8*4,floor((room-r1A)/5)*5*4,4*((room-r1A)%5*8+8),4*(floor((room - r1A)/5)*5+5),c_yellow,c_yellow,c_yellow,c_yellow,false)
+draw_rectangle_colour((room_history[i,0]-r1A )%7*8*4,floor((room_history[i,0]-r1A)/7)*5*4,4*((room_history[i,0]-r1A)%7*8+8),4*(floor((room_history[i,0] - r1A)/7)*5+5),c_green,c_green,c_green,c_green,false)
+draw_rectangle_colour((room-r1A )%7*8*4,floor((room-r1A)/7)*5*4,4*((room-r1A)%7*8+8),4*(floor((room - r1A)/7)*5+5),c_yellow,c_yellow,c_yellow,c_yellow,false)
 draw_set_colour(c_black)
-for(var i = 8;i&lt;=5*8;i+=8)
+for(var i = 8;i&lt;=7*8;i+=8)
 draw_line(i*4,0,i*4,6*5*4)
 for(var i = 5;i&lt;=6*5;i+=5)
-draw_line(0,i*4,5*8*4,i*4)
+draw_line(0,i*4,7*8*4,i*4)
 surface_reset_target()
 last_room = room
 </string>
