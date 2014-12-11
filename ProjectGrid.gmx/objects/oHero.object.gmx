@@ -67,6 +67,9 @@ for(var i = 1; i &lt; 3; i++)
     inv[i] = false  
 }
 inv[0] = true
+
+atk_dir = 0
+atk_cur = 0
 </string>
           </argument>
         </arguments>
@@ -102,6 +105,76 @@ draw_line(i*4,0,i*4,6*5*4)
 for(var i = 5;i&lt;=6*5;i+=5)
 draw_line(0,i*4,7*8*4,i*4)
 surface_reset_target()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///delayed attacks
+switch(atk_dir)
+{
+    case 4:
+    for(var i = atk_cur; i&lt;atk_num;i++)
+        if weapon_array[i,1] &gt; 0 and atk_cur != i
+        {
+            alarm[4] = weapon_array[i,1]
+            atk_cur = i
+            break;
+        }
+        else
+            instance_create(x - 64*(weapon_array[i,0] % 1 * 10),y-64*abs(floor(weapon_array[i,0])),oAttackParticle)
+            
+    break;
+    case 5:
+    for(var i = atk_cur; i&lt;atk_num;i++)
+        if weapon_array[i,1] &gt; 0 and atk_cur != i
+        {
+            alarm[4] = weapon_array[i,1]
+            atk_cur = i
+            break;
+        }
+        else
+            instance_create(x + 64*(weapon_array[i,0] % 1 * 10),y+64*abs(floor(weapon_array[i,0])),oAttackParticle)
+    break;
+    case 6:
+    for(var i = atk_cur; i&lt;atk_num;i++)
+        if weapon_array[i,1] &gt; 0 and atk_cur != i
+        {
+            alarm[4] = weapon_array[i,1]
+            atk_cur = i
+            break;
+        }
+        else
+            instance_create(x-64*abs(floor(weapon_array[i,0])),y + 64*(weapon_array[i,0] % 1 * 10),oAttackParticle)
+    break;
+    case 7:
+    for(var i = atk_cur; i&lt;atk_num;i++)
+        if weapon_array[i,1] &gt; 0 and atk_cur != i
+        {
+            alarm[4] = weapon_array[i,1]
+            atk_cur = i
+            break;
+        }
+        else
+            instance_create(x+64*abs(floor(weapon_array[i,0])),y - 64*(weapon_array[i,0] % 1 * 10),oAttackParticle)
+}
 </string>
           </argument>
         </arguments>
@@ -392,23 +465,54 @@ if move_cooldown = false and ds_list_size(key_log) &gt; 0 and room_start &lt;= 0
 }
 if atk_cooldown = false and ds_list_size(atk_key_log) &gt; 0
 {
-    switch(ds_list_find_value(atk_key_log, ds_list_size(atk_key_log)-1))
+    atk_dir = ds_list_find_value(atk_key_log, ds_list_size(atk_key_log)-1)
+    atk_cur = 0
+    switch(atk_dir)
     {
     case 4:
-    for(var i = 1; i&lt;=weapon_array[0];i++)
-        instance_create(x,y - 64*weapon_array[i],oAttackParticle)
+    for(var i = 0; i&lt;atk_num;i++)
+        if weapon_array[i,1] &gt; 0
+        {
+            alarm[4] = weapon_array[i,1]
+            atk_cur = i
+            break;
+        }
+        else
+            instance_create(x - 64*(weapon_array[i,0] % 1 * 10),y-64*abs(floor(weapon_array[i,0])),oAttackParticle)
+            
     break;
     case 5:
-    for(var i = 1; i&lt;=weapon_array[0];i++)
-        instance_create(x,y + 64*weapon_array[i],oAttackParticle)
+    for(var i = 0; i&lt;atk_num;i++)
+        if weapon_array[i,1] &gt; 0
+        {
+            alarm[4] = weapon_array[i,1]
+            atk_cur = i
+            break;
+        }
+        else
+            instance_create(x + 64*(weapon_array[i,0] % 1 * 10),y+64*abs(floor(weapon_array[i,0])),oAttackParticle)
     break;
     case 6:
-    for(var i = 1; i&lt;=weapon_array[0];i++)
-        instance_create(x - 64*weapon_array[i],y,oAttackParticle)
+    for(var i = 0; i&lt;atk_num;i++)
+        if weapon_array[i,1] &gt; 0
+        {
+            alarm[4] = weapon_array[i,1]
+            atk_cur = i
+            break;
+        }
+        else
+            instance_create(x-64*abs(floor(weapon_array[i,0])),y + 64*(weapon_array[i,0] % 1 * 10),oAttackParticle)
     break;
     case 7:
-    for(var i = 1; i&lt;=weapon_array[0];i++)
-        instance_create(x + 64*weapon_array[i],y,oAttackParticle)
+    for(var i = 0; i&lt;atk_num;i++)
+        if weapon_array[i,1] &gt; 0
+        {
+            alarm[4] = weapon_array[i,1]
+            atk_cur = i
+            break;
+        }
+        else
+            instance_create(x+64*abs(floor(weapon_array[i,0])),y - 64*(weapon_array[i,0] % 1 * 10),oAttackParticle)
     }
     atk_cooldown = true
     alarm[1] = atk_speed
@@ -890,18 +994,18 @@ if show_grid = true
         draw_sprite(invt[1],0,0,0)
     surface_reset_target()
     draw_set_alpha(.4)
-    for(var i = 1; i&lt;=weapon_array[0];i++)
-        if ds_grid_get(grid_map,x/64,(y+64*weapon_array[i])/64) != -1
-            draw_surface(s1,x,y+64*weapon_array[i])
-    for(var i = 1; i&lt;=weapon_array[0];i++)
-        if ds_grid_get(grid_map,x/64,(y-64*weapon_array[i])/64) != -1
-            draw_surface(s1,x,y-64*weapon_array[i])
-    for(var i = 1; i&lt;=weapon_array[0];i++)
-        if ds_grid_get(grid_map,(x+64*weapon_array[i])/64,y/64) != -1
-            draw_surface(s1,x+64*weapon_array[i],y)
-    for(var i = 1; i&lt;=weapon_array[0];i++)
-        if ds_grid_get(grid_map,(x-64*weapon_array[i])/64,y/64) != -1
-            draw_surface(s1,x-64*weapon_array[i],y)
+    for(var i = 0; i&lt;atk_num;i++)
+        if ds_grid_get(grid_map,x/64 + (weapon_array[i,0] % 1 * 10),(y+64*abs(floor(weapon_array[i,0])))/64) != -1
+            draw_surface(s1,x + 64*(weapon_array[i,0] % 1 * 10),y+64*abs(floor(weapon_array[i,0])))
+    for(var i = 0; i&lt;atk_num;i++)
+        if ds_grid_get(grid_map,x/64 - (weapon_array[i,0] % 1 * 10),(y-64*abs(floor(weapon_array[i,0])))/64) != -1
+            draw_surface(s1,x - 64*(weapon_array[i,0] % 1 * 10),y-64*abs(floor(weapon_array[i,0])))
+    for(var i = 0; i&lt;atk_num;i++)
+        if ds_grid_get(grid_map,(x+64*abs(floor(weapon_array[i,0])))/64,y/64 - (weapon_array[i,0] % 1 * 10)) != -1
+            draw_surface(s1,x+64*abs(floor(weapon_array[i,0])),y - 64*(weapon_array[i,0] % 1 * 10))
+    for(var i = 0; i&lt;atk_num;i++)
+        if ds_grid_get(grid_map,(x-64*abs(floor(weapon_array[i,0])))/64,y/64 + (weapon_array[i,0] % 1 * 10)) != -1
+            draw_surface(s1,x-64*abs(floor(weapon_array[i,0])),y + 64*(weapon_array[i,0] % 1 * 10))
     draw_set_alpha(1)
     var no_shader = false
     if parry = true
