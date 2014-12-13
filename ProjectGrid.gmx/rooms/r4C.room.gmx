@@ -92,6 +92,8 @@
     <tile bgName="bg_wall" x="960" y="384" w="64" h="64" xo="0" yo="64" id="10000250" name="inst_06C98300" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_wall" x="960" y="192" w="64" h="64" xo="0" yo="64" id="10000253" name="inst_3DB37D75" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bg_wall" x="960" y="128" w="64" h="64" xo="0" yo="64" id="10000254" name="inst_DAB6F4F5" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bg_wall" x="960" y="256" w="64" h="64" xo="0" yo="64" id="10003090" name="inst_4FD13844" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bg_wall" x="960" y="320" w="64" h="64" xo="0" yo="64" id="10003091" name="inst_78DEBDB8" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
   </tiles>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>

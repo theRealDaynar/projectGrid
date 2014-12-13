@@ -32,7 +32,6 @@ switch(argument0)
         a[0] = "Yaelschwert"
         a[1] = sAttackPossibility
     break;
-    break;
     default:
         a[0] = "ITEM"
         a[1] = sAttackPossibility
