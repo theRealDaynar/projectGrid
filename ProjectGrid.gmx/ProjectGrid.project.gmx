@@ -31,6 +31,8 @@
     <sprite>sprites\sAcid</sprite>
     <sprite>sprites\sChest</sprite>
     <sprite>sprites\sKnife</sprite>
+    <sprite>sprites\sUI</sprite>
+    <sprite>sprites\sHeart</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>

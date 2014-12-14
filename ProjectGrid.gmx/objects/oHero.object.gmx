@@ -950,17 +950,17 @@ if room_start &gt; 0
             draw_surface(old_room_surface,xx, yy)
      draw_sprite_ext(sprite_index,image_index,px,py,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
 }
-draw_rectangle_colour(0,640,room_width,room_height,c_black,c_black,c_black,c_black,false)
+draw_sprite(sUI,0,0,640)
 if surface_exists(mini_map)
-    draw_surface(mini_map,room_width - surface_get_width(mini_map),room_height - surface_get_height(mini_map))
+    draw_surface(mini_map,room_width - surface_get_width(mini_map)-10,room_height - surface_get_height(mini_map)-5)
     
 for(var i = 0; i &lt; hp; i++)
 {
-    draw_sprite(sprite9_bestsprite,0,70+i*70, room_height - 90)
+    draw_sprite(sHeart,0,5+i*90, room_height - 110)
 }
 var itm = item_info(weapon - 1)
-draw_sprite(itm[1],0,room_width - 300,room_height - 80)
-draw_text_outline(room_width - 268,room_height - 90,itm[0],c_dkgray,c_white,1)
+//draw_sprite(itm[1],0,room_width - 300,room_height - 80)
+draw_text_outline(652,room_height - 64,itm[0],c_dkgray,c_white,1)
 //grid debug
 if show_grid = true
 {

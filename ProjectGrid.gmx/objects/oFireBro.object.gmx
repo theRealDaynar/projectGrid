@@ -32,6 +32,7 @@ true_x = x
 true_y = y
 image_speed = 0
 hp = 1
+parried = false
 </string>
           </argument>
         </arguments>
@@ -204,41 +205,83 @@ if ds_grid_get(grid_map,x/64,y/64) != 0 or x &lt; 0 or y &lt; 0 or x &gt;= 64*16
     y = yprevious
     x = xprevious
     if ds_grid_get(grid_map,x/64+1,y/64) = 0
-        instance_create(x+64,y,oFireBall)
+    {
+        var inst = instance_create(x+64,y,oFireBall)
+        if parried = true
+        {
+            inst.friendly = true
+            inst.image_blend = c_blue
+        }
+    }
     if ds_grid_get(grid_map,x/64,y/64+1) = 0
     {
         var inst = instance_create(x,y+64,oFireBall);
         inst.image_angle = 270
+        if parried = true
+        {
+            inst.friendly = true
+            inst.image_blend = c_blue
+        }
     }
     if ds_grid_get(grid_map,x/64,y/64-1) = 0
     {
         var inst = instance_create(x,y-64,oFireBall);
         inst.image_angle = 90
+        if parried = true
+        {
+            inst.friendly = true
+            inst.image_blend = c_blue
+        }
     }
     if ds_grid_get(grid_map,x/64-1,y/64) = 0
     {
         var inst = instance_create(x-64,y,oFireBall);
         inst.image_angle = 180
+        if parried = true
+        {
+            inst.friendly = true
+            inst.image_blend = c_blue
+        }
     }
     if ds_grid_get(grid_map,x/64+1,y/64-1) = 0
     {
         var inst = instance_create(x+64,y-64,oFireBall);
         inst.image_angle = 45
+        if parried = true
+        {
+            inst.friendly = true
+            inst.image_blend = c_blue
+        }
     }
     if ds_grid_get(grid_map,x/64-1,y/64-1) = 0
     {
         var inst = instance_create(x-64,y-64,oFireBall);
         inst.image_angle = 135
+        if parried = true
+        {
+            inst.friendly = true
+            inst.image_blend = c_blue
+        }
     }
     if ds_grid_get(grid_map,x/64-1,y/64+1) = 0
     {
         var inst = instance_create(x-64,y+64,oFireBall);
         inst.image_angle = 225
+        if parried = true
+        {
+            inst.friendly = true
+            inst.image_blend = c_blue
+        }
     }
     if ds_grid_get(grid_map,x/64+1,y/64+1) = 0
     {
         var inst = instance_create(x+64,y+64,oFireBall);
         inst.image_angle = 315
+        if parried = true
+        {
+            inst.friendly = true
+            inst.image_blend = c_blue
+        }
     }
     }
     if splode = 1
@@ -291,7 +334,8 @@ if (ramming=false) {image_index=0} else {image_index=1}
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>switch(ramming)
+            <string>parried = true
+switch(ramming)
 {
     case 1:
         ramming = 3;

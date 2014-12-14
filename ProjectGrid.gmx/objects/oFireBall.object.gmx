@@ -28,6 +28,7 @@
             <string>image_speed=.2
 turn_speed = room_speed/8
 alarm[0] = turn_speed
+friendly = false
 </string>
           </argument>
         </arguments>
@@ -53,11 +54,17 @@ alarm[0] = turn_speed
             <string>direction = image_angle
 speed = 64/turn_speed
 alarm[0] = turn_speed
-if ds_grid_get(grid_map,round(x+sign(hspeed)*64)/64,round(y+sign(vspeed)*64)/64) != 0
+var inst = ds_grid_get(grid_map,round(x+sign(hspeed)*64)/64,round(y+sign(vspeed)*64)/64)
+if  inst != 0
 {
-    if ds_grid_get(grid_map,round(x+sign(hspeed)*64)/64,round(y+sign(vspeed)*64)/64).object_index = oHero
+    if inst.object_index = oHero
     {
         if damage_player() = 1 {instance_destroy()}
+    }
+    else if inst = oEnemy
+    {
+        inst.hp --
+        instance_destroy()
     }
     else
         instance_destroy()
@@ -109,7 +116,7 @@ direction = image_angle
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(sprite_index,image_index,x+32,y+32,1,1,image_angle,c_white,1)
+            <string>draw_sprite_ext(sprite_index,image_index,x+32,y+32,1,1,image_angle,image_blend,1)
 </string>
           </argument>
         </arguments>
