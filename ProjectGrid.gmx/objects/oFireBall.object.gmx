@@ -61,7 +61,7 @@ if  inst != 0
     {
         if damage_player() = 1 {instance_destroy()}
     }
-    else if inst = oEnemy
+    else if object_get_parent(inst.object_index) = oEnemy
     {
         inst.hp --
         instance_destroy()
