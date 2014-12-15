@@ -326,6 +326,11 @@ tele_y += lengthdir_y(tele_speed,tele_dir)
             <string>var alpha = .3
 if alarm[0] &lt; room_speed/4
 alpha = 1
+var d = point_distance(x + 32,y + 32,tele_x + 32,tele_y + 32)
+draw_set_alpha(alpha)
+for(var i = 1; i &lt; 6; i++)
+    draw_circle_colour(x+32+lengthdir_x(d/6*i, point_direction(x+32,y+32,32+tele_x,32+tele_y)),32+y+lengthdir_y(d/6*i, point_direction(x+32,32+y,32+tele_x,32+tele_y)),random(7) + 3.5,c_fuchsia,c_red,false)
+draw_set_alpha(1)
 draw_sprite_ext(sAttackPossibility,image_index,tele_x,tele_y,1,1,0,c_fuchsia,alpha)
 draw_self()
 </string>
