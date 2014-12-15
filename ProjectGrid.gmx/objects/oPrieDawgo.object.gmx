@@ -372,11 +372,16 @@ rock_dir = point_direction(rock_true_x,rock_true_y,x,y)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if ds_grid_get(grid_map,x/64,y/64) != -1 and self_destruct = false
-    draw_self()
-if rock_thrown = true
+            <string>if rock_thrown = true and rock_turn_speed*2 &gt; alarm[3]
 {
-    draw_sprite_ext(sRock,0, 32+rock_x + lengthdir_x(rock_dis,rock_angle), 32+rock_y + lengthdir_y(rock_dis,rock_angle), 1, 1, boulder_angle, c_black,.5 * (rock_airtime-alarm[3])/rock_airtime + .3)
+    draw_sprite_ext(sRock,0,32+rock_x+ lengthdir_x(rock_dis,rock_angle),32+rock_y - (alarm[3]/(rock_turn_speed*2))*64*3+ lengthdir_y(rock_dis,rock_angle),1,1,boulder_angle,c_white,(rock_turn_speed*2-alarm[3])/(rock_turn_speed*2))
+}else if rock_thrown = true and alarm[3] &gt; rock_turn_speed * 9 
+{
+    draw_sprite_ext(sRock,0,32+x,y - 200*(rock_turn_speed-alarm[1])/rock_turn_speed,1,1,boulder_angle,c_white,alarm[1]/rock_turn_speed)
+}
+if parried =true
+{
+    draw_sprite_ext(sRock,0,32+rock_x,32+rock_y,1,1,boulder_angle,c_white,1)
 }
 </string>
           </argument>
