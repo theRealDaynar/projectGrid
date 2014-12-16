@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>alive = false
+image_speed = 0
 </string>
           </argument>
         </arguments>
@@ -51,7 +52,7 @@
             <string>if alive = true
 {
 if instance_exists(oHero)
-    if distance_to_point(oHero.x,oHero.y) &lt;= 65
+    if (oHero.x = x and (oHero.y = y + 36 or oHero.y = y - 36)) or (oHero.y = y and (oHero.x = x + 36 or oHero.x = x - 36))
     {
         instance_destroy()
         instance_create(x,y,oBushMan)
@@ -82,6 +83,7 @@ if instance_exists(oHero)
             <string>if irandom(1) = 1
 {
     alive = true
+    image_speed = 1
     ds_grid_set(grid_map,x/64,y/64,-2)
 }
 else

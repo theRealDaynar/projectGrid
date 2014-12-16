@@ -51,6 +51,7 @@ item = 0
             <kind>1</kind>
             <string>///add to grid
 ds_grid_add(grid_map,x/64,y/64,id)
+ds_grid_add(grid_map,x/64+1,y/64,id)
 </string>
           </argument>
         </arguments>
@@ -74,7 +75,7 @@ ds_grid_add(grid_map,x/64,y/64,id)
           <argument>
             <kind>1</kind>
             <string>///open chest
-if oHero.x = x and oHero.y = y+64
+if (oHero.x = x or oHero.x = x + 64) and oHero.y = y+64
 {
     image_index = 1
     var i = item_info(item)

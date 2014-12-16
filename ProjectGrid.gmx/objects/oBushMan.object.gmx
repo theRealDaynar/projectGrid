@@ -28,8 +28,9 @@
             <string>image_speed = sprite_get_number(sprite_index)/(room_speed/4)
 on_player = false
 hp = 5
+jump_speed = room_speed/2
 atk_speed = room_speed
-move_towards_point(oHero.x,oHero.y,point_distance(x,y,oHero.x,oHero.y)/atk_speed)
+move_towards_point(oHero.x,oHero.y,point_distance(x,y,oHero.x,oHero.y)/jump_speed)
 fist = false
 </string>
           </argument>

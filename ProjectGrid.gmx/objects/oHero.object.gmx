@@ -25,7 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>turn_speed = room_speed/2.5
+            <string>if instance_number(oHero) &gt; 1
+    instance_destroy()
+else
+{
+turn_speed = room_speed/2.5
 atk_speed = room_speed*500
 atk_cooldown = false
 move_cooldown = false
@@ -41,7 +45,8 @@ room_start = -1
 room_trans = room_speed
 dd = false
 mini_map = surface_create(5*8*4,6*5*4)
-hp = 4
+max_hp = 4
+hp = max_hp
 weapon = 1
 weapon_array = change_weapon(weapon)
 s1 = surface_create(64,64)
@@ -70,6 +75,7 @@ inv[0] = true
 
 atk_dir = 0
 atk_cur = 0
+}
 </string>
           </argument>
         </arguments>
@@ -954,9 +960,12 @@ draw_sprite(sUI,0,0,640)
 if surface_exists(mini_map)
     draw_surface(mini_map,room_width - surface_get_width(mini_map)-10,room_height - surface_get_height(mini_map)-5)
     
-for(var i = 0; i &lt; hp; i++)
+for(var i = 0; i &lt; max_hp; i++)
 {
-    draw_sprite(sHeart,0,5+i*90, room_height - 110)
+    if hp &gt; i
+        draw_sprite(sHeart,0,5+i*90, room_height - 110)
+    else
+        draw_sprite(sHeart,1,5+i*90, room_height - 110)
 }
 var itm = item_info(weapon - 1)
 //draw_sprite(itm[1],0,room_width - 300,room_height - 80)
