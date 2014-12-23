@@ -6,7 +6,7 @@
   <depth>0</depth>
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>sprite1_man</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -76,6 +76,15 @@ inv[0] = true
 atk_dir = 0
 atk_cur = 0
 }
+//hats
+hat = 0
+/*
+1 = ninja
+2 = roman
+3 = tophat
+4 = knight
+*/
+
 </string>
           </argument>
         </arguments>
@@ -145,8 +154,11 @@ switch(atk_dir)
             break;
         }
         else
+        {
             instance_create(x - 64*(weapon_array[i,0] % 1 * 10),y-64*abs(floor(weapon_array[i,0])),oAttackParticle)
-            
+            if hat = 2
+                instance_create(x - 64*(weapon_array[i,0] % 1 * 10),y+64*abs(floor(weapon_array[i,0])),oAttackParticle)
+        }
     break;
     case 5:
     for(var i = atk_cur; i&lt;atk_num;i++)
@@ -157,7 +169,11 @@ switch(atk_dir)
             break;
         }
         else
+        {
             instance_create(x + 64*(weapon_array[i,0] % 1 * 10),y+64*abs(floor(weapon_array[i,0])),oAttackParticle)
+            if hat = 2
+                instance_create(x + 64*(weapon_array[i,0] % 1 * 10),y-64*abs(floor(weapon_array[i,0])),oAttackParticle)
+        }
     break;
     case 6:
     for(var i = atk_cur; i&lt;atk_num;i++)
@@ -168,7 +184,11 @@ switch(atk_dir)
             break;
         }
         else
+        {
             instance_create(x-64*abs(floor(weapon_array[i,0])),y + 64*(weapon_array[i,0] % 1 * 10),oAttackParticle)
+            if hat = 2
+                instance_create(x+64*abs(floor(weapon_array[i,0])),y + 64*(weapon_array[i,0] % 1 * 10),oAttackParticle)
+        }
     break;
     case 7:
     for(var i = atk_cur; i&lt;atk_num;i++)
@@ -179,7 +199,11 @@ switch(atk_dir)
             break;
         }
         else
+        {
             instance_create(x+64*abs(floor(weapon_array[i,0])),y - 64*(weapon_array[i,0] % 1 * 10),oAttackParticle)
+            if hat = 2
+                instance_create(x-64*abs(floor(weapon_array[i,0])),y - 64*(weapon_array[i,0] % 1 * 10),oAttackParticle)
+        }
 }
 </string>
           </argument>
@@ -469,6 +493,7 @@ if move_cooldown = false and ds_list_size(key_log) &gt; 0 and room_start &lt;= 0
         alarm[0] = turn_speed
     }
 }
+//delayed attacks
 if atk_cooldown = false and ds_list_size(atk_key_log) &gt; 0
 {
     atk_dir = ds_list_find_value(atk_key_log, ds_list_size(atk_key_log)-1)
@@ -484,8 +509,11 @@ if atk_cooldown = false and ds_list_size(atk_key_log) &gt; 0
             break;
         }
         else
+        {
             instance_create(x - 64*(weapon_array[i,0] % 1 * 10),y-64*abs(floor(weapon_array[i,0])),oAttackParticle)
-            
+            if hat = 2
+                instance_create(x - 64*(weapon_array[i,0] % 1 * 10),y+64*abs(floor(weapon_array[i,0])),oAttackParticle)
+        }  
     break;
     case 5:
     for(var i = 0; i&lt;atk_num;i++)
@@ -496,7 +524,11 @@ if atk_cooldown = false and ds_list_size(atk_key_log) &gt; 0
             break;
         }
         else
+        {
             instance_create(x + 64*(weapon_array[i,0] % 1 * 10),y+64*abs(floor(weapon_array[i,0])),oAttackParticle)
+            if hat = 2
+                instance_create(x + 64*(weapon_array[i,0] % 1 * 10),y-64*abs(floor(weapon_array[i,0])),oAttackParticle)
+        }
     break;
     case 6:
     for(var i = 0; i&lt;atk_num;i++)
@@ -507,7 +539,11 @@ if atk_cooldown = false and ds_list_size(atk_key_log) &gt; 0
             break;
         }
         else
+        {
             instance_create(x-64*abs(floor(weapon_array[i,0])),y + 64*(weapon_array[i,0] % 1 * 10),oAttackParticle)
+            if hat = 2
+                instance_create(x+64*abs(floor(weapon_array[i,0])),y + 64*(weapon_array[i,0] % 1 * 10),oAttackParticle)
+        }
     break;
     case 7:
     for(var i = 0; i&lt;atk_num;i++)
@@ -518,10 +554,18 @@ if atk_cooldown = false and ds_list_size(atk_key_log) &gt; 0
             break;
         }
         else
+        {
             instance_create(x+64*abs(floor(weapon_array[i,0])),y - 64*(weapon_array[i,0] % 1 * 10),oAttackParticle)
+            if hat = 2
+                instance_create(x-64*abs(floor(weapon_array[i,0])),y - 64*(weapon_array[i,0] % 1 * 10),oAttackParticle)
+        }
     }
     atk_cooldown = true
-    alarm[1] = atk_speed
+    var temp_atk_speed = atk_speed
+    //wearing ninja hat
+    if hat = 1
+        temp_atk_speed /= 2
+    alarm[1] = temp_atk_speed
 }
 </string>
           </argument>
@@ -1135,6 +1179,57 @@ if show_grid = true
         shader_reset()
     else
         draw_sprite_ext(sprite_index,image_index,x,y,1,1,0,c_black,.4)
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="69">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///go through hats
+if hat = 4
+{
+    max_hp--
+    if max_hp &lt; hp
+        hp = max_hp
+}
+hat ++
+if hat = 5
+    hat = 0
+switch hat
+{
+    case 1:
+        sprite_index = sPlayer_ninja
+    break;
+    case 2:
+        sprite_index = sPlayer_roman
+    break;
+    case 3:
+        sprite_index = sPlayer_tophat
+    break;
+    case 4:
+        sprite_index = sPlayer_knight
+        max_hp ++
+        hp ++
+    break;
+    default:
+        sprite_index = sprite1_man
 }
 </string>
           </argument>

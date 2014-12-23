@@ -8,6 +8,7 @@
   <sprites name="sprites">
     <sprite>sprites\yoImmaPlayaDawg</sprite>
     <sprite>sprites\sprite1_man</sprite>
+    <sprite>sprites\sHatHolder</sprite>
     <sprite>sprites\sNPC</sprite>
     <sprite>sprites\sFireBro</sprite>
     <sprite>sprites\sAttack</sprite>
@@ -33,6 +34,11 @@
     <sprite>sprites\sKnife</sprite>
     <sprite>sprites\sUI</sprite>
     <sprite>sprites\sHeart</sprite>
+    <sprite>sprites\sPlayer_tophat</sprite>
+    <sprite>sprites\sPlayer_ninja</sprite>
+    <sprite>sprites\sPlayer_roman</sprite>
+    <sprite>sprites\sPlayer_knight</sprite>
+    <sprite>sprites\sMoney</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -77,6 +83,7 @@
     <object>objects\oAttackParticle</object>
     <object>objects\menu</object>
     <object>objects\oFireBall</object>
+    <object>objects\oMoney</object>
     <object>objects\oBoneSnake</object>
     <object>objects\oBush</object>
     <object>objects\oBushMan</object>
