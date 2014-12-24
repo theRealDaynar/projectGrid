@@ -83,7 +83,8 @@ pulse_timer = room_speed/2
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if distance_to_object(oHero)&lt;=64
+            <string>///damage player
+if distance_to_object(oHero)&lt;=64
 oHero.hp--
 </string>
           </argument>
@@ -132,7 +133,8 @@ tele_x = tele_true_x
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>tele_speed = 0
+            <string>///move teleport redicule
+tele_speed = 0
 tele_y = tele_true_y
 tele_x = tele_true_x
 var tele_x_previous = tele_x
@@ -170,7 +172,7 @@ var tele_y_previous = tele_y
         case 3:
             tele_x+=64;
     }
-    if (ds_grid_get(grid_map,tele_x/64,tele_y/64) != 0 and ds_grid_get(grid_map,tele_x/64,tele_y/64) != oHero.id) or  tele_x &lt; 0  or tele_y &lt; 0 or tele_x &gt;= 64*16 or tele_y &gt;= 64*10 
+    if /*(ds_grid_get(grid_map,tele_x/64,tele_y/64) != 0 and ds_grid_get(grid_map,tele_x/64,tele_y/64) != oHero.id) or */ tele_x &lt; 0  or tele_y &lt; 0 or tele_x &gt;= 64*16 or tele_y &gt;= 64*10 
     {
         tele_y = tele_y_previous
         tele_x = tele_x_previous
@@ -218,14 +220,19 @@ if tele_x!=tele_x_previous or tele_y!=tele_y_previous
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = tele_true_x
-y = tele_true_y
-ds_grid_set(grid_map,xprevious/64,yprevious/64,0)
-ds_grid_set(grid_map,x/64,y/64,id)
-alarm[0] = turn_speed
-alarm[1] = tele_turn_speed
-alarm[3] = pulse_timer
-
+            <string>///teleport
+if ds_grid_get(grid_map,tele_true_x/64,tele_true_y/64) = 0
+{
+    x = tele_true_x
+    y = tele_true_y
+    ds_grid_set(grid_map,xprevious/64,yprevious/64,0)
+    ds_grid_set(grid_map,x/64,y/64,id)
+    alarm[0] = turn_speed
+    alarm[1] = tele_turn_speed
+    alarm[3] = pulse_timer
+}
+else
+    alarm[0] = tele_turn_speed
 </string>
           </argument>
         </arguments>
