@@ -39,6 +39,8 @@
     <sprite>sprites\sPlayer_roman</sprite>
     <sprite>sprites\sPlayer_knight</sprite>
     <sprite>sprites\sMoney</sprite>
+    <sprite>sprites\sprite33</sprite>
+    <sprite>sprites\sprite34</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
